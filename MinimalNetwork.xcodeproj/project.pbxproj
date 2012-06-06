@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		39102226157FFEE40033341D /* MinimalNetwork-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3910221E157FFEE40033341D /* MinimalNetwork-Prefix.pch */; };
-		39102227157FFEE40033341D /* MinimalNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 3910221F157FFEE40033341D /* MinimalNetwork.h */; };
-		39102228157FFEE40033341D /* MNURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 39102220157FFEE40033341D /* MNURLRequest.h */; };
-		39102229157FFEE40033341D /* MNURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 39102221157FFEE40033341D /* MNURLRequest.m */; };
-		3910222A157FFEE40033341D /* MNURLRequestLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39102222157FFEE40033341D /* MNURLRequestLoader.h */; };
-		3910222B157FFEE40033341D /* MNURLRequestLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 39102223157FFEE40033341D /* MNURLRequestLoader.m */; };
-		3910222C157FFEE40033341D /* MNURLRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 39102224157FFEE40033341D /* MNURLRequestQueue.h */; };
-		3910222D157FFEE40033341D /* MNURLRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 39102225157FFEE40033341D /* MNURLRequestQueue.m */; };
+		391022A315800E4A0033341D /* MinimalNetwork-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3910229B15800E4A0033341D /* MinimalNetwork-Prefix.pch */; };
+		391022A415800E4A0033341D /* MinimalNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 3910229C15800E4A0033341D /* MinimalNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		391022A515800E4A0033341D /* MNURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3910229D15800E4A0033341D /* MNURLRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		391022A615800E4A0033341D /* MNURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3910229E15800E4A0033341D /* MNURLRequest.m */; };
+		391022A715800E4A0033341D /* MNURLRequestLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3910229F15800E4A0033341D /* MNURLRequestLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		391022A815800E4A0033341D /* MNURLRequestLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 391022A015800E4A0033341D /* MNURLRequestLoader.m */; };
+		391022A915800E4A0033341D /* MNURLRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 391022A115800E4A0033341D /* MNURLRequestQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		391022AA15800E4A0033341D /* MNURLRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 391022A215800E4A0033341D /* MNURLRequestQueue.m */; };
 		3996B58115706543008F3935 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B58015706543008F3935 /* Foundation.framework */; };
 		3996B58F15706543008F3935 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B58E15706543008F3935 /* SenTestingKit.framework */; };
 		3996B59115706543008F3935 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B59015706543008F3935 /* UIKit.framework */; };
@@ -35,14 +35,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3910221E157FFEE40033341D /* MinimalNetwork-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MinimalNetwork-Prefix.pch"; sourceTree = "<group>"; };
-		3910221F157FFEE40033341D /* MinimalNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalNetwork.h; sourceTree = "<group>"; };
-		39102220157FFEE40033341D /* MNURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequest.h; sourceTree = "<group>"; };
-		39102221157FFEE40033341D /* MNURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequest.m; sourceTree = "<group>"; };
-		39102222157FFEE40033341D /* MNURLRequestLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequestLoader.h; sourceTree = "<group>"; };
-		39102223157FFEE40033341D /* MNURLRequestLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequestLoader.m; sourceTree = "<group>"; };
-		39102224157FFEE40033341D /* MNURLRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequestQueue.h; sourceTree = "<group>"; };
-		39102225157FFEE40033341D /* MNURLRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequestQueue.m; sourceTree = "<group>"; };
+		3910229B15800E4A0033341D /* MinimalNetwork-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MinimalNetwork-Prefix.pch"; sourceTree = "<group>"; };
+		3910229C15800E4A0033341D /* MinimalNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalNetwork.h; sourceTree = "<group>"; };
+		3910229D15800E4A0033341D /* MNURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequest.h; sourceTree = "<group>"; };
+		3910229E15800E4A0033341D /* MNURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequest.m; sourceTree = "<group>"; };
+		3910229F15800E4A0033341D /* MNURLRequestLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequestLoader.h; sourceTree = "<group>"; };
+		391022A015800E4A0033341D /* MNURLRequestLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequestLoader.m; sourceTree = "<group>"; };
+		391022A115800E4A0033341D /* MNURLRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequestQueue.h; sourceTree = "<group>"; };
+		391022A215800E4A0033341D /* MNURLRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequestQueue.m; sourceTree = "<group>"; };
 		3996B57D15706543008F3935 /* libMinimalNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMinimalNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3996B58015706543008F3935 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3996B58D15706543008F3935 /* MinimalNetworkTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinimalNetworkTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,25 +77,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3910221D157FFEE40033341D /* Source */ = {
+		3910229A15800E4A0033341D /* MinimalNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				3910221E157FFEE40033341D /* MinimalNetwork-Prefix.pch */,
-				3910221F157FFEE40033341D /* MinimalNetwork.h */,
-				39102220157FFEE40033341D /* MNURLRequest.h */,
-				39102221157FFEE40033341D /* MNURLRequest.m */,
-				39102222157FFEE40033341D /* MNURLRequestLoader.h */,
-				39102223157FFEE40033341D /* MNURLRequestLoader.m */,
-				39102224157FFEE40033341D /* MNURLRequestQueue.h */,
-				39102225157FFEE40033341D /* MNURLRequestQueue.m */,
+				3910229B15800E4A0033341D /* MinimalNetwork-Prefix.pch */,
+				3910229C15800E4A0033341D /* MinimalNetwork.h */,
+				3910229D15800E4A0033341D /* MNURLRequest.h */,
+				3910229E15800E4A0033341D /* MNURLRequest.m */,
+				3910229F15800E4A0033341D /* MNURLRequestLoader.h */,
+				391022A015800E4A0033341D /* MNURLRequestLoader.m */,
+				391022A115800E4A0033341D /* MNURLRequestQueue.h */,
+				391022A215800E4A0033341D /* MNURLRequestQueue.m */,
 			);
-			path = Source;
+			path = MinimalNetwork;
 			sourceTree = "<group>";
 		};
 		3996B57215706543008F3935 = {
 			isa = PBXGroup;
 			children = (
-				3910221D157FFEE40033341D /* Source */,
+				3910229A15800E4A0033341D /* MinimalNetwork */,
 				3996B57F15706543008F3935 /* Frameworks */,
 				3996B57E15706543008F3935 /* Products */,
 			);
@@ -129,11 +129,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39102226157FFEE40033341D /* MinimalNetwork-Prefix.pch in Headers */,
-				39102227157FFEE40033341D /* MinimalNetwork.h in Headers */,
-				39102228157FFEE40033341D /* MNURLRequest.h in Headers */,
-				3910222A157FFEE40033341D /* MNURLRequestLoader.h in Headers */,
-				3910222C157FFEE40033341D /* MNURLRequestQueue.h in Headers */,
+				391022A315800E4A0033341D /* MinimalNetwork-Prefix.pch in Headers */,
+				391022A415800E4A0033341D /* MinimalNetwork.h in Headers */,
+				391022A515800E4A0033341D /* MNURLRequest.h in Headers */,
+				391022A715800E4A0033341D /* MNURLRequestLoader.h in Headers */,
+				391022A915800E4A0033341D /* MNURLRequestQueue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,9 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39102229157FFEE40033341D /* MNURLRequest.m in Sources */,
-				3910222B157FFEE40033341D /* MNURLRequestLoader.m in Sources */,
-				3910222D157FFEE40033341D /* MNURLRequestQueue.m in Sources */,
+				391022A615800E4A0033341D /* MNURLRequest.m in Sources */,
+				391022A815800E4A0033341D /* MNURLRequestLoader.m in Sources */,
+				391022AA15800E4A0033341D /* MNURLRequestQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +303,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/MNNetwork.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Source/MinimalNetwork-Prefix.pch";
+				GCC_PREFIX_HEADER = "MinimalNetwork/MinimalNetwork-Prefix.pch";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MinimalNetwork;
@@ -318,7 +318,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/MNNetwork.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Source/MinimalNetwork-Prefix.pch";
+				GCC_PREFIX_HEADER = "MinimalNetwork/MinimalNetwork-Prefix.pch";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = MinimalNetwork;

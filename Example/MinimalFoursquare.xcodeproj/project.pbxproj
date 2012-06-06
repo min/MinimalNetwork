@@ -1,0 +1,378 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		39102244158005AA0033341D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39102243158005AA0033341D /* UIKit.framework */; };
+		39102246158005AA0033341D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39102245158005AA0033341D /* Foundation.framework */; };
+		39102248158005AA0033341D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39102247158005AA0033341D /* CoreGraphics.framework */; };
+		3910224E158005AA0033341D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3910224C158005AA0033341D /* InfoPlist.strings */; };
+		39102250158005AA0033341D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3910224F158005AA0033341D /* main.m */; };
+		39102254158005AA0033341D /* MNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 39102253158005AA0033341D /* MNAppDelegate.m */; };
+		39102257158005AA0033341D /* MNViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39102256158005AA0033341D /* MNViewController.m */; };
+		3910225A158005AA0033341D /* MNViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 39102258158005AA0033341D /* MNViewController_iPhone.xib */; };
+		3910225D158005AA0033341D /* MNViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3910225B158005AA0033341D /* MNViewController_iPad.xib */; };
+		391022761580063A0033341D /* libMinimalNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39102270158006030033341D /* libMinimalNetwork.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3910226F158006030033341D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39102267158006030033341D /* MinimalNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3996B57D15706543008F3935;
+			remoteInfo = MinimalNetwork;
+		};
+		39102271158006030033341D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39102267158006030033341D /* MinimalNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3996B58D15706543008F3935;
+			remoteInfo = MinimalNetworkTests;
+		};
+		39102274158006340033341D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 39102267158006030033341D /* MinimalNetwork.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 3996B57C15706543008F3935;
+			remoteInfo = MinimalNetwork;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3910223F158005AA0033341D /* MinimalFoursquare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinimalFoursquare.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		39102243158005AA0033341D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		39102245158005AA0033341D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		39102247158005AA0033341D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3910224B158005AA0033341D /* MinimalFoursquare-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MinimalFoursquare-Info.plist"; sourceTree = "<group>"; };
+		3910224D158005AA0033341D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3910224F158005AA0033341D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		39102251158005AA0033341D /* MinimalFoursquare-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MinimalFoursquare-Prefix.pch"; sourceTree = "<group>"; };
+		39102252158005AA0033341D /* MNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNAppDelegate.h; sourceTree = "<group>"; };
+		39102253158005AA0033341D /* MNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNAppDelegate.m; sourceTree = "<group>"; };
+		39102255158005AA0033341D /* MNViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNViewController.h; sourceTree = "<group>"; };
+		39102256158005AA0033341D /* MNViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MNViewController.m; sourceTree = "<group>"; };
+		39102259158005AA0033341D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MNViewController_iPhone.xib; sourceTree = "<group>"; };
+		3910225C158005AA0033341D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MNViewController_iPad.xib; sourceTree = "<group>"; };
+		39102267158006030033341D /* MinimalNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MinimalNetwork.xcodeproj; path = ../MinimalNetwork.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3910223C158005AA0033341D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				391022761580063A0033341D /* libMinimalNetwork.a in Frameworks */,
+				39102244158005AA0033341D /* UIKit.framework in Frameworks */,
+				39102246158005AA0033341D /* Foundation.framework in Frameworks */,
+				39102248158005AA0033341D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		39102234158005AA0033341D = {
+			isa = PBXGroup;
+			children = (
+				39102267158006030033341D /* MinimalNetwork.xcodeproj */,
+				39102249158005AA0033341D /* MinimalFoursquare */,
+				39102242158005AA0033341D /* Frameworks */,
+				39102240158005AA0033341D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		39102240158005AA0033341D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3910223F158005AA0033341D /* MinimalFoursquare.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		39102242158005AA0033341D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				39102243158005AA0033341D /* UIKit.framework */,
+				39102245158005AA0033341D /* Foundation.framework */,
+				39102247158005AA0033341D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		39102249158005AA0033341D /* MinimalFoursquare */ = {
+			isa = PBXGroup;
+			children = (
+				39102252158005AA0033341D /* MNAppDelegate.h */,
+				39102253158005AA0033341D /* MNAppDelegate.m */,
+				39102255158005AA0033341D /* MNViewController.h */,
+				39102256158005AA0033341D /* MNViewController.m */,
+				39102258158005AA0033341D /* MNViewController_iPhone.xib */,
+				3910225B158005AA0033341D /* MNViewController_iPad.xib */,
+				3910224A158005AA0033341D /* Supporting Files */,
+			);
+			path = MinimalFoursquare;
+			sourceTree = "<group>";
+		};
+		3910224A158005AA0033341D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3910224B158005AA0033341D /* MinimalFoursquare-Info.plist */,
+				3910224C158005AA0033341D /* InfoPlist.strings */,
+				3910224F158005AA0033341D /* main.m */,
+				39102251158005AA0033341D /* MinimalFoursquare-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		39102268158006030033341D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				39102270158006030033341D /* libMinimalNetwork.a */,
+				39102272158006030033341D /* MinimalNetworkTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3910223E158005AA0033341D /* MinimalFoursquare */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 39102260158005AA0033341D /* Build configuration list for PBXNativeTarget "MinimalFoursquare" */;
+			buildPhases = (
+				3910223B158005AA0033341D /* Sources */,
+				3910223C158005AA0033341D /* Frameworks */,
+				3910223D158005AA0033341D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				39102275158006340033341D /* PBXTargetDependency */,
+			);
+			name = MinimalFoursquare;
+			productName = MinimalFoursquare;
+			productReference = 3910223F158005AA0033341D /* MinimalFoursquare.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		39102236158005AA0033341D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MN;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 39102239158005AA0033341D /* Build configuration list for PBXProject "MinimalFoursquare" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 39102234158005AA0033341D;
+			productRefGroup = 39102240158005AA0033341D /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 39102268158006030033341D /* Products */;
+					ProjectRef = 39102267158006030033341D /* MinimalNetwork.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				3910223E158005AA0033341D /* MinimalFoursquare */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		39102270158006030033341D /* libMinimalNetwork.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMinimalNetwork.a;
+			remoteRef = 3910226F158006030033341D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		39102272158006030033341D /* MinimalNetworkTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MinimalNetworkTests.octest;
+			remoteRef = 39102271158006030033341D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3910223D158005AA0033341D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3910224E158005AA0033341D /* InfoPlist.strings in Resources */,
+				3910225A158005AA0033341D /* MNViewController_iPhone.xib in Resources */,
+				3910225D158005AA0033341D /* MNViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3910223B158005AA0033341D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				39102250158005AA0033341D /* main.m in Sources */,
+				39102254158005AA0033341D /* MNAppDelegate.m in Sources */,
+				39102257158005AA0033341D /* MNViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		39102275158006340033341D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MinimalNetwork;
+			targetProxy = 39102274158006340033341D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3910224C158005AA0033341D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3910224D158005AA0033341D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		39102258158005AA0033341D /* MNViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				39102259158005AA0033341D /* en */,
+			);
+			name = MNViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		3910225B158005AA0033341D /* MNViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3910225C158005AA0033341D /* en */,
+			);
+			name = MNViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3910225E158005AA0033341D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3910225F158005AA0033341D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		39102261158005AA0033341D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MinimalFoursquare/MinimalFoursquare-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../\"";
+				INFOPLIST_FILE = "MinimalFoursquare/MinimalFoursquare-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		39102262158005AA0033341D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MinimalFoursquare/MinimalFoursquare-Prefix.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/../../\"";
+				INFOPLIST_FILE = "MinimalFoursquare/MinimalFoursquare-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		39102239158005AA0033341D /* Build configuration list for PBXProject "MinimalFoursquare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3910225E158005AA0033341D /* Debug */,
+				3910225F158005AA0033341D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		39102260158005AA0033341D /* Build configuration list for PBXNativeTarget "MinimalFoursquare" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39102261158005AA0033341D /* Debug */,
+				39102262158005AA0033341D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 39102236158005AA0033341D /* Project object */;
+}
