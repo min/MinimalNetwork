@@ -6,6 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#define GET(path) [MNURLRequest get:path]
+#define PUT(path) [MNURLRequest get:path]
+#define POST(path) [MNURLRequest get:path]
+#define DELETE(path) [MNURLRequest get:path]
+
 typedef void (^MNRequestSuccessBlock)(id request, id data);
 typedef void (^MNRequestFailureBlock)(id request, NSError *error);
 typedef void (^MNRequessBlock)(id request);

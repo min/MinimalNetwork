@@ -7,20 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		39102226157FFEE40033341D /* MinimalNetwork-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3910221E157FFEE40033341D /* MinimalNetwork-Prefix.pch */; };
+		39102227157FFEE40033341D /* MinimalNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 3910221F157FFEE40033341D /* MinimalNetwork.h */; };
+		39102228157FFEE40033341D /* MNURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 39102220157FFEE40033341D /* MNURLRequest.h */; };
+		39102229157FFEE40033341D /* MNURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 39102221157FFEE40033341D /* MNURLRequest.m */; };
+		3910222A157FFEE40033341D /* MNURLRequestLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39102222157FFEE40033341D /* MNURLRequestLoader.h */; };
+		3910222B157FFEE40033341D /* MNURLRequestLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 39102223157FFEE40033341D /* MNURLRequestLoader.m */; };
+		3910222C157FFEE40033341D /* MNURLRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 39102224157FFEE40033341D /* MNURLRequestQueue.h */; };
+		3910222D157FFEE40033341D /* MNURLRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 39102225157FFEE40033341D /* MNURLRequestQueue.m */; };
 		3996B58115706543008F3935 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B58015706543008F3935 /* Foundation.framework */; };
 		3996B58F15706543008F3935 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B58E15706543008F3935 /* SenTestingKit.framework */; };
 		3996B59115706543008F3935 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B59015706543008F3935 /* UIKit.framework */; };
 		3996B59215706543008F3935 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B58015706543008F3935 /* Foundation.framework */; };
-		3996B59515706543008F3935 /* libMNNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B57D15706543008F3935 /* libMNNetwork.a */; };
-		3996B5A91570658E008F3935 /* MNURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3996B5A71570658E008F3935 /* MNURLRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3996B5AA1570658E008F3935 /* MNURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3996B5A81570658E008F3935 /* MNURLRequest.m */; };
-		3996B5AD1570662F008F3935 /* MNURLRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 3996B5AB1570662F008F3935 /* MNURLRequestQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3996B5AE1570662F008F3935 /* MNURLRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3996B5AC1570662F008F3935 /* MNURLRequestQueue.m */; };
+		3996B59515706543008F3935 /* libMinimalNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B57D15706543008F3935 /* libMinimalNetwork.a */; };
 		3996B5B4157128C8008F3935 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B5B3157128C8008F3935 /* CFNetwork.framework */; };
 		3996B5B6157128D1008F3935 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B5B5157128D1008F3935 /* SystemConfiguration.framework */; };
-		3996B6101572CEFA008F3935 /* MNNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 3996B58515706543008F3935 /* MNNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		39E36C1A157A62E300B4B7A8 /* MNURLRequestLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 39E36C18157A62E300B4B7A8 /* MNURLRequestLoader.h */; };
-		39E36C1B157A62E300B4B7A8 /* MNURLRequestLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E36C19157A62E300B4B7A8 /* MNURLRequestLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,21 +35,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3996B57D15706543008F3935 /* libMNNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMNNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3910221E157FFEE40033341D /* MinimalNetwork-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MinimalNetwork-Prefix.pch"; sourceTree = "<group>"; };
+		3910221F157FFEE40033341D /* MinimalNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinimalNetwork.h; sourceTree = "<group>"; };
+		39102220157FFEE40033341D /* MNURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequest.h; sourceTree = "<group>"; };
+		39102221157FFEE40033341D /* MNURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequest.m; sourceTree = "<group>"; };
+		39102222157FFEE40033341D /* MNURLRequestLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequestLoader.h; sourceTree = "<group>"; };
+		39102223157FFEE40033341D /* MNURLRequestLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequestLoader.m; sourceTree = "<group>"; };
+		39102224157FFEE40033341D /* MNURLRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequestQueue.h; sourceTree = "<group>"; };
+		39102225157FFEE40033341D /* MNURLRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequestQueue.m; sourceTree = "<group>"; };
+		3996B57D15706543008F3935 /* libMinimalNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMinimalNetwork.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3996B58015706543008F3935 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		3996B58415706543008F3935 /* MNNetwork-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MNNetwork-Prefix.pch"; sourceTree = "<group>"; };
-		3996B58515706543008F3935 /* MNNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MNNetwork.h; sourceTree = "<group>"; };
-		3996B58D15706543008F3935 /* MNNetworkTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MNNetworkTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3996B58D15706543008F3935 /* MinimalNetworkTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinimalNetworkTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3996B58E15706543008F3935 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3996B59015706543008F3935 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		3996B5A71570658E008F3935 /* MNURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequest.h; sourceTree = "<group>"; };
-		3996B5A81570658E008F3935 /* MNURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequest.m; sourceTree = "<group>"; };
-		3996B5AB1570662F008F3935 /* MNURLRequestQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequestQueue.h; sourceTree = "<group>"; };
-		3996B5AC1570662F008F3935 /* MNURLRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequestQueue.m; sourceTree = "<group>"; };
 		3996B5B3157128C8008F3935 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3996B5B5157128D1008F3935 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		39E36C18157A62E300B4B7A8 /* MNURLRequestLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLRequestLoader.h; sourceTree = "<group>"; };
-		39E36C19157A62E300B4B7A8 /* MNURLRequestLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLRequestLoader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,17 +70,32 @@
 				3996B58F15706543008F3935 /* SenTestingKit.framework in Frameworks */,
 				3996B59115706543008F3935 /* UIKit.framework in Frameworks */,
 				3996B59215706543008F3935 /* Foundation.framework in Frameworks */,
-				3996B59515706543008F3935 /* libMNNetwork.a in Frameworks */,
+				3996B59515706543008F3935 /* libMinimalNetwork.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3910221D157FFEE40033341D /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				3910221E157FFEE40033341D /* MinimalNetwork-Prefix.pch */,
+				3910221F157FFEE40033341D /* MinimalNetwork.h */,
+				39102220157FFEE40033341D /* MNURLRequest.h */,
+				39102221157FFEE40033341D /* MNURLRequest.m */,
+				39102222157FFEE40033341D /* MNURLRequestLoader.h */,
+				39102223157FFEE40033341D /* MNURLRequestLoader.m */,
+				39102224157FFEE40033341D /* MNURLRequestQueue.h */,
+				39102225157FFEE40033341D /* MNURLRequestQueue.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		3996B57215706543008F3935 = {
 			isa = PBXGroup;
 			children = (
-				3996B58215706543008F3935 /* MNNetwork */,
+				3910221D157FFEE40033341D /* Source */,
 				3996B57F15706543008F3935 /* Frameworks */,
 				3996B57E15706543008F3935 /* Products */,
 			);
@@ -88,8 +104,8 @@
 		3996B57E15706543008F3935 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3996B57D15706543008F3935 /* libMNNetwork.a */,
-				3996B58D15706543008F3935 /* MNNetworkTests.octest */,
+				3996B57D15706543008F3935 /* libMinimalNetwork.a */,
+				3996B58D15706543008F3935 /* MinimalNetworkTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,29 +122,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3996B58215706543008F3935 /* MNNetwork */ = {
-			isa = PBXGroup;
-			children = (
-				3996B58515706543008F3935 /* MNNetwork.h */,
-				3996B5A71570658E008F3935 /* MNURLRequest.h */,
-				3996B5A81570658E008F3935 /* MNURLRequest.m */,
-				39E36C18157A62E300B4B7A8 /* MNURLRequestLoader.h */,
-				39E36C19157A62E300B4B7A8 /* MNURLRequestLoader.m */,
-				3996B5AB1570662F008F3935 /* MNURLRequestQueue.h */,
-				3996B5AC1570662F008F3935 /* MNURLRequestQueue.m */,
-				3996B58315706543008F3935 /* Supporting Files */,
-			);
-			path = MNNetwork;
-			sourceTree = "<group>";
-		};
-		3996B58315706543008F3935 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3996B58415706543008F3935 /* MNNetwork-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -136,19 +129,20 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3996B5A91570658E008F3935 /* MNURLRequest.h in Headers */,
-				3996B5AD1570662F008F3935 /* MNURLRequestQueue.h in Headers */,
-				3996B6101572CEFA008F3935 /* MNNetwork.h in Headers */,
-				39E36C1A157A62E300B4B7A8 /* MNURLRequestLoader.h in Headers */,
+				39102226157FFEE40033341D /* MinimalNetwork-Prefix.pch in Headers */,
+				39102227157FFEE40033341D /* MinimalNetwork.h in Headers */,
+				39102228157FFEE40033341D /* MNURLRequest.h in Headers */,
+				3910222A157FFEE40033341D /* MNURLRequestLoader.h in Headers */,
+				3910222C157FFEE40033341D /* MNURLRequestQueue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3996B57C15706543008F3935 /* MNNetwork */ = {
+		3996B57C15706543008F3935 /* MinimalNetwork */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3996B5A115706543008F3935 /* Build configuration list for PBXNativeTarget "MNNetwork" */;
+			buildConfigurationList = 3996B5A115706543008F3935 /* Build configuration list for PBXNativeTarget "MinimalNetwork" */;
 			buildPhases = (
 				3996B57915706543008F3935 /* Sources */,
 				3996B57A15706543008F3935 /* Frameworks */,
@@ -158,14 +152,14 @@
 			);
 			dependencies = (
 			);
-			name = MNNetwork;
+			name = MinimalNetwork;
 			productName = MNNetwork;
-			productReference = 3996B57D15706543008F3935 /* libMNNetwork.a */;
+			productReference = 3996B57D15706543008F3935 /* libMinimalNetwork.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		3996B58C15706543008F3935 /* MNNetworkTests */ = {
+		3996B58C15706543008F3935 /* MinimalNetworkTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3996B5A415706543008F3935 /* Build configuration list for PBXNativeTarget "MNNetworkTests" */;
+			buildConfigurationList = 3996B5A415706543008F3935 /* Build configuration list for PBXNativeTarget "MinimalNetworkTests" */;
 			buildPhases = (
 				3996B58815706543008F3935 /* Sources */,
 				3996B58915706543008F3935 /* Frameworks */,
@@ -177,9 +171,9 @@
 			dependencies = (
 				3996B59415706543008F3935 /* PBXTargetDependency */,
 			);
-			name = MNNetworkTests;
+			name = MinimalNetworkTests;
 			productName = MNNetworkTests;
-			productReference = 3996B58D15706543008F3935 /* MNNetworkTests.octest */;
+			productReference = 3996B58D15706543008F3935 /* MinimalNetworkTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -190,7 +184,7 @@
 			attributes = {
 				LastUpgradeCheck = 0430;
 			};
-			buildConfigurationList = 3996B57715706543008F3935 /* Build configuration list for PBXProject "MNNetwork" */;
+			buildConfigurationList = 3996B57715706543008F3935 /* Build configuration list for PBXProject "MinimalNetwork" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -202,8 +196,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3996B57C15706543008F3935 /* MNNetwork */,
-				3996B58C15706543008F3935 /* MNNetworkTests */,
+				3996B57C15706543008F3935 /* MinimalNetwork */,
+				3996B58C15706543008F3935 /* MinimalNetworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -239,9 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3996B5AA1570658E008F3935 /* MNURLRequest.m in Sources */,
-				3996B5AE1570662F008F3935 /* MNURLRequestQueue.m in Sources */,
-				39E36C1B157A62E300B4B7A8 /* MNURLRequestLoader.m in Sources */,
+				39102229157FFEE40033341D /* MNURLRequest.m in Sources */,
+				3910222B157FFEE40033341D /* MNURLRequestLoader.m in Sources */,
+				3910222D157FFEE40033341D /* MNURLRequestQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,7 +251,7 @@
 /* Begin PBXTargetDependency section */
 		3996B59415706543008F3935 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3996B57C15706543008F3935 /* MNNetwork */;
+			target = 3996B57C15706543008F3935 /* MinimalNetwork */;
 			targetProxy = 3996B59315706543008F3935 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -309,10 +303,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/MNNetwork.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MNNetwork/MNNetwork-Prefix.pch";
+				GCC_PREFIX_HEADER = "Source/MinimalNetwork-Prefix.pch";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MinimalNetwork;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -324,10 +318,10 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = /tmp/MNNetwork.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MNNetwork/MNNetwork-Prefix.pch";
+				GCC_PREFIX_HEADER = "Source/MinimalNetwork-Prefix.pch";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MinimalNetwork;
 				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -343,7 +337,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MNNetwork/MNNetwork-Prefix.pch";
 				INFOPLIST_FILE = "MNNetworkTests/MNNetworkTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MinimalNetworkTests;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -358,7 +352,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MNNetwork/MNNetwork-Prefix.pch";
 				INFOPLIST_FILE = "MNNetworkTests/MNNetworkTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MinimalNetworkTests;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -366,7 +360,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3996B57715706543008F3935 /* Build configuration list for PBXProject "MNNetwork" */ = {
+		3996B57715706543008F3935 /* Build configuration list for PBXProject "MinimalNetwork" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3996B59F15706543008F3935 /* Debug */,
@@ -375,7 +369,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3996B5A115706543008F3935 /* Build configuration list for PBXNativeTarget "MNNetwork" */ = {
+		3996B5A115706543008F3935 /* Build configuration list for PBXNativeTarget "MinimalNetwork" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3996B5A215706543008F3935 /* Debug */,
@@ -384,7 +378,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3996B5A415706543008F3935 /* Build configuration list for PBXNativeTarget "MNNetworkTests" */ = {
+		3996B5A415706543008F3935 /* Build configuration list for PBXNativeTarget "MinimalNetworkTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3996B5A515706543008F3935 /* Debug */,
