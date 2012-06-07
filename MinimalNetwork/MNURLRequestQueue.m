@@ -53,6 +53,8 @@
 }
 
 - (void)load:(MNURLRequest *)request {
+  if (request.cancelled) return;
+  
   MNURLRequestLoader *loader = 
     [[MNURLRequestLoader alloc] initWithRequest:request 
                                        queue:self];

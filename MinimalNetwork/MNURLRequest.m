@@ -80,6 +80,9 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
   return self;
 }
 
+- (void)dealloc {
+}
+
 - (void)prepare {  
   if (self.parameters && [self.parameters isKindOfClass:[NSDictionary class]] && self.parameters.count > 0) {
     NSString *method = self.HTTPMethod;

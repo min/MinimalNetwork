@@ -32,9 +32,14 @@
 - (id)initWithRequest:(MNURLRequest *)request queue:(MNURLRequestQueue *)queue {
   if (self = [super init]) {
     self.request     = request;
-    self.connection  = [NSURLConnection connectionWithRequest:self.request delegate:self];
     self.queue       = queue;
     self.parse_queue = dispatch_queue_create("com.minimal.parse", 0);
+    
+    self.connection = [[NSURLConnection alloc] initWithRequest:self.request
+                                                      delegate:self startImmediately:NO];
+    
+    [self.connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    [self.connection start];
   }
   return self;
 }
@@ -45,8 +50,7 @@
 
 - (id)process {
   id data = self.responseData;
-  NSLog(@"mime: %@", self.response.MIMEType);
-  
+
   if ([self.response.MIMEType isEqualToString:@"image/jpeg"] || 
       [self.response.MIMEType isEqualToString:@"image/jpg"] ||
       [self.response.MIMEType isEqualToString:@"image/png"] ||
@@ -81,7 +85,7 @@
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {
-  return cachedResponse;
+  return nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
@@ -97,11 +101,16 @@
     return;
   }
   
+  __block __typeof__(self) _self = self;
+  
   dispatch_async(self.parse_queue, ^{
-    id data = [self process];
+    id data = [_self process];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-      [self.queue loader:self success:data];
+      [_self.queue loader:self success:data];
+      
+      _self.responseData = nil;
+      _self.connection = nil;
     });
   });
 }
@@ -111,6 +120,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
   self.responseData = nil;
+  self.connection = nil;
 
   [self.queue loader:self failure:error];
 }

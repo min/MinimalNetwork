@@ -20,6 +20,15 @@
 
 @synthesize title, id, imageUrl;
 
+- (id)initWithDictionary:(NSDictionary *)dictionary {
+  if ((self = [super init])) {
+    self.id       = [dictionary valueForKey:@"id"];
+    self.title    = [dictionary valueForKey:@"title"];
+    self.imageUrl = [dictionary valueForKey:@"image_teaser_url"];
+  }
+  return self;
+}
+
 + (void)everyone:(void (^)(NSArray *shots))success
          failure:(void (^)(NSError *error))failure {
   
@@ -51,15 +60,6 @@
       failure(error);
     }).
     send();
-}
-
-- (id)initWithDictionary:(NSDictionary *)dictionary {
-  if ((self = [super init])) {
-    self.id       = [dictionary valueForKey:@"id"];
-    self.title    = [dictionary valueForKey:@"title"];
-    self.imageUrl = [dictionary valueForKey:@"image_url"];
-  }
-  return self;
 }
 
 @end
