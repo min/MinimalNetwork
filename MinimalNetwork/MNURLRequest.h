@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#define GET(path) [MNURLRequest get:path]
+#define GET(path, ...) [MNURLRequest get:[NSString stringWithFormat:path, ##__VA_ARGS__]]
 #define PUT(path) [MNURLRequest get:path]
 #define POST(path) [MNURLRequest get:path]
 #define DELETE(path) [MNURLRequest get:path]
