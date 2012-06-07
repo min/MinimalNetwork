@@ -12,6 +12,7 @@
 
 @property (readonly, strong, nonatomic) NSNumber *id;
 @property (readonly, strong, nonatomic) NSString *title;
+@property (readonly, strong, nonatomic) NSString *imageUrl;
 
 + (void)everyone:(void (^)(NSArray *shots))success
          failure:(void (^)(NSError *error))failure;

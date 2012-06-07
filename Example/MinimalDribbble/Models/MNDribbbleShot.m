@@ -12,17 +12,18 @@
 
 @property (readwrite, strong, nonatomic) NSNumber *id;
 @property (readwrite, strong, nonatomic) NSString *title;
+@property (readwrite, strong, nonatomic) NSString *imageUrl;
 
 @end
 
 @implementation MNDribbbleShot
 
-@synthesize title, id;
+@synthesize title, id, imageUrl;
 
 + (void)everyone:(void (^)(NSArray *shots))success
          failure:(void (^)(NSError *error))failure {
   
-  GET(@"http://api.dribbble.com/shots/everyone").
+  GET(@"http://api.dribbble.com/shots/everyone?per_page=30").
     success(^(MNURLRequest *request, id data){
       NSArray *dictionaries = [data valueForKey:@"shots"];
       NSMutableArray *shots = [[NSMutableArray alloc] initWithCapacity:0];
@@ -54,8 +55,9 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
   if ((self = [super init])) {
-    self.id    = [dictionary valueForKey:@"id"];
-    self.title = [dictionary valueForKey:@"title"];
+    self.id       = [dictionary valueForKey:@"id"];
+    self.title    = [dictionary valueForKey:@"title"];
+    self.imageUrl = [dictionary valueForKey:@"image_url"];
   }
   return self;
 }

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "MNURLRequest.h"
 #import "MNURLRequestQueue.h"
 #import "MNURLRequestLoader.h"
@@ -44,6 +45,14 @@
 
 - (id)process {
   id data = self.responseData;
+  NSLog(@"mime: %@", self.response.MIMEType);
+  
+  if ([self.response.MIMEType isEqualToString:@"image/jpeg"] || 
+      [self.response.MIMEType isEqualToString:@"image/jpg"] ||
+      [self.response.MIMEType isEqualToString:@"image/png"] ||
+      [self.response.MIMEType isEqualToString:@"image/gif"]) {
+    return [UIImage imageWithData:self.responseData];
+  }
   
   if ([[self.response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound) {
     Class clazz = NSClassFromString(@"NSJSONSerialization");

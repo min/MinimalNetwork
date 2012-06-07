@@ -22,6 +22,8 @@
 		3996B59515706543008F3935 /* libMinimalNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B57D15706543008F3935 /* libMinimalNetwork.a */; };
 		3996B5B4157128C8008F3935 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B5B3157128C8008F3935 /* CFNetwork.framework */; };
 		3996B5B6157128D1008F3935 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B5B5157128D1008F3935 /* SystemConfiguration.framework */; };
+		39B8441D15804FC800390ABE /* UIImageView+MinimalNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B8441B15804FC800390ABE /* UIImageView+MinimalNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		39B8441E15804FC800390ABE /* UIImageView+MinimalNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B8441C15804FC800390ABE /* UIImageView+MinimalNetwork.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		3996B59015706543008F3935 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		3996B5B3157128C8008F3935 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3996B5B5157128D1008F3935 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		39B8441B15804FC800390ABE /* UIImageView+MinimalNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MinimalNetwork.h"; sourceTree = "<group>"; };
+		39B8441C15804FC800390ABE /* UIImageView+MinimalNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MinimalNetwork.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,8 @@
 				391022A015800E4A0033341D /* MNURLRequestLoader.m */,
 				391022A115800E4A0033341D /* MNURLRequestQueue.h */,
 				391022A215800E4A0033341D /* MNURLRequestQueue.m */,
+				39B8441B15804FC800390ABE /* UIImageView+MinimalNetwork.h */,
+				39B8441C15804FC800390ABE /* UIImageView+MinimalNetwork.m */,
 			);
 			path = MinimalNetwork;
 			sourceTree = "<group>";
@@ -134,6 +140,7 @@
 				391022A515800E4A0033341D /* MNURLRequest.h in Headers */,
 				391022A715800E4A0033341D /* MNURLRequestLoader.h in Headers */,
 				391022A915800E4A0033341D /* MNURLRequestQueue.h in Headers */,
+				39B8441D15804FC800390ABE /* UIImageView+MinimalNetwork.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +243,7 @@
 				391022A615800E4A0033341D /* MNURLRequest.m in Sources */,
 				391022A815800E4A0033341D /* MNURLRequestLoader.m in Sources */,
 				391022AA15800E4A0033341D /* MNURLRequestQueue.m in Sources */,
+				39B8441E15804FC800390ABE /* UIImageView+MinimalNetwork.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

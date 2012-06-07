@@ -15,7 +15,7 @@
 
 @implementation MNShotViewController
 
-@synthesize shotId = _shotId;
+@synthesize shotId = _shotId, imageView = _imageView;
 
 - (id)initWithShotId:(NSNumber *)shotId {
   if (self = [super init]) {
@@ -26,6 +26,10 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  self.view.backgroundColor = [UIColor whiteColor];
+  self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10.0f,10.0f,300.0f,240.0f)];  
+  [self.view addSubview:self.imageView];
 }
 
 - (void)viewDidUnload {

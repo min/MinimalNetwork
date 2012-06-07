@@ -14,14 +14,30 @@
 
 @property (readwrite, strong, nonatomic) NSArray *shots;
 
+- (void)reload;
+
 @end
 
 @implementation MNShotsViewController
 
 @synthesize shots = _shots;
 
+- (void)reload {
+  [MNDribbbleShot everyone:^(NSArray *shots) {
+    self.shots = shots;
+    [self.tableView reloadData];
+  }
+  failure:^(NSError *error) {                   
+  }];
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.tableView.rowHeight = 100.0f;
+  self.navigationItem.rightBarButtonItem = 
+  [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+                                                target:self 
+                                                action:@selector(reload)];
 }
 
 - (void)viewDidUnload {
@@ -30,18 +46,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-    
-  [MNDribbbleShot everyone:^(NSArray *shots) {
-    self.shots = shots;
-    [self.tableView reloadData];
-  }
-  failure:^(NSError *error) {
-                     
-  }];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-  return (interfaceOrientation == UIInterfaceOrientationPortrait);
+  [self reload];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -63,6 +68,7 @@
   MNDribbbleShot *shot = [self.shots objectAtIndex:indexPath.row];
   
   cell.textLabel.text = shot.title;
+  [cell.imageView load:shot.imageUrl];
   
   return cell;
 }

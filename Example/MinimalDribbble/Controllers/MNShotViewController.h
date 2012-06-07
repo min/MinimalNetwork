@@ -10,7 +10,8 @@
 
 @interface MNShotViewController : MNViewController
 
-@property (strong, nonatomic) NSNumber *shotId;
+@property (strong, nonatomic) NSNumber    *shotId;
+@property (strong, nonatomic) UIImageView *imageView;
 
 - (id)initWithShotId:(NSNumber *)shotId;
 

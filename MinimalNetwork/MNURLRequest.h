@@ -38,4 +38,6 @@ typedef void (^MNRequessBlock)(id request);
      success:(MNRequestSuccessBlock)success
      failure:(MNRequestFailureBlock)failure;
 
+- (void)cancel;
+
 @end

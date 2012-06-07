@@ -124,6 +124,10 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
   };
 }
 
+- (void)cancel {
+  [[MNURLRequestQueue mainQueue] cancel:self];
+}
+
 + (void)request:(NSURL *)URL 
          method:(NSString *)method
          before:(MNRequessBlock)before
