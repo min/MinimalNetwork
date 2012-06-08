@@ -19,5 +19,6 @@
 @property(nonatomic,readonly) NSURLConnection   *connection;
 
 - (id)initWithRequest:(MNURLRequest *)request queue:(MNURLRequestQueue *)queue;
+- (void)cancel;
 
 @end

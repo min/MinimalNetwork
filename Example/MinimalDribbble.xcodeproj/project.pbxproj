@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		390287AC1581B7BC0041CCB7 /* MNShotCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 390287AB1581B7BC0041CCB7 /* MNShotCell.m */; };
 		399B3D2F1580286100608FCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399B3D2E1580286100608FCC /* UIKit.framework */; };
 		399B3D311580286100608FCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399B3D301580286100608FCC /* Foundation.framework */; };
 		399B3D331580286100608FCC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 399B3D321580286100608FCC /* CoreGraphics.framework */; };
@@ -45,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		390287AA1581B7BC0041CCB7 /* MNShotCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNShotCell.h; sourceTree = "<group>"; };
+		390287AB1581B7BC0041CCB7 /* MNShotCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNShotCell.m; sourceTree = "<group>"; };
 		399B3D2A1580286100608FCC /* MinimalDribbble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinimalDribbble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		399B3D2E1580286100608FCC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		399B3D301580286100608FCC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -158,6 +161,8 @@
 		39B8440D158029DC00390ABE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				390287AA1581B7BC0041CCB7 /* MNShotCell.h */,
+				390287AB1581B7BC0041CCB7 /* MNShotCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 				39B8441015802A2A00390ABE /* MNShotsViewController.m in Sources */,
 				39B8441315802D6100390ABE /* MNShotViewController.m in Sources */,
 				39B8441A15802E6300390ABE /* MNDribbbleShot.m in Sources */,
+				390287AC1581B7BC0041CCB7 /* MNShotCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

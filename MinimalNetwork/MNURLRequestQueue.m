@@ -81,6 +81,19 @@
 - (void)cancel:(MNURLRequest *)request {
   request.cancelled = YES;
   [self.requests removeObject:request];
+  
+  NSMutableArray *cancelledLoaders = [NSMutableArray arrayWithCapacity:0];
+  
+  for (MNURLRequestLoader *loader in self.loaders) {
+    if (request == loader.request) {
+      [loader cancel];
+      [cancelledLoaders addObject:loader];
+    }
+  }
+  
+  for (MNURLRequestLoader *loader in cancelledLoaders) {
+    [self didFinish:loader];
+  }
 }
 
 - (void)didFinish:(MNURLRequestLoader *)loader {

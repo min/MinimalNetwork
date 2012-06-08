@@ -68,6 +68,13 @@
   return data;
 }
 
+- (void)cancel {
+  [self.connection cancel];
+  
+  self.responseData = nil;
+  self.connection = nil;
+}
+
 #pragma mark -
 #pragma mark NSURLConnectionDelegate
 
@@ -92,6 +99,9 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {    
+  if (self.request.cancelled) {
+    return;
+  }
   if (self.response.statusCode >= 300) {
     NSError *error = [NSError errorWithDomain:NSURLErrorDomain 
                                          code:self.response.statusCode 
@@ -119,6 +129,9 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+  if (self.request.cancelled) {
+    return;
+  }
   self.responseData = nil;
   self.connection = nil;
 

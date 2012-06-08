@@ -30,22 +30,18 @@ static char kMNImageURLObjectKey;
 }
 
 - (void)mn_setRequest:(MNURLRequest *)request {
-  if (self.mn_request && [self.mn_request.URL isEqual:request.URL]) {
-    return;
-  }
-  [self cancel];
-  
   objc_setAssociatedObject(self, &kMNImageURLObjectKey, request, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)load:(NSString *)url {
+  [self.mn_request cancel];
+  self.image = nil;
+  
   __block id _self = self;
   
   self.mn_request = GET(url).
     success(^(MNURLRequest *request, UIImage *image){
       [_self setImage:image];
-    }).
-    failure(^(MNURLRequest *request, NSError *error){
     }).
     send();
 }

@@ -8,6 +8,7 @@
 
 #import "MNShotsViewController.h"
 #import "MNShotViewController.h"
+#import "MNShotCell.h"
 #import "MNDribbbleShot.h"
 
 @interface MNShotsViewController ()
@@ -59,16 +60,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *CellIdentifier = @"CellIdentifier";
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  MNShotCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    cell = [[MNShotCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
   }
   
   MNDribbbleShot *shot = [self.shots objectAtIndex:indexPath.row];
   
-  cell.textLabel.text = shot.title;
-  [cell.imageView load:shot.imageUrl];
+  [cell.textLabel setText:shot.title];
+  [cell.thumbnailView load:shot.imageUrl];
+  [cell setNeedsLayout];
   
   return cell;
 }
