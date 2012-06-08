@@ -14,6 +14,9 @@
 @synthesize window, navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [[NSURLCache sharedURLCache] setMemoryCapacity:1024*1024*2];
+  [[NSURLCache sharedURLCache] setDiskCapacity:1024*1024*1024];
+  
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   
   MNShotsViewController *controller = [[MNShotsViewController alloc] initWithStyle:UITableViewStylePlain];

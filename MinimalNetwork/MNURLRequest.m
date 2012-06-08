@@ -54,6 +54,7 @@
 @end
 
 static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) {
+  [request setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
   [request setHTTPMethod:method];
   [request prepare];
   [[MNURLRequestQueue mainQueue] queue:request];
@@ -152,7 +153,9 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 
 + (MNURLRequest *)get:(NSString *)URLString {
   MNURLRequest *request = [[MNURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]];
+  request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
   request.HTTPMethod = @"GET";
+  
   return request;
 }
 

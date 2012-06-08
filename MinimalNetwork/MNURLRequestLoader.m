@@ -29,43 +29,69 @@
 @synthesize request = _request, response = _response, responseData = _responseData;
 @synthesize connection = _connection, queue = _queue, parse_queue;
 
++ (id)process:(NSHTTPURLResponse *)response data:(NSData *)data {
+  id processedData = data;
+  
+  if ([response.MIMEType isEqualToString:@"image/jpeg"] || 
+      [response.MIMEType isEqualToString:@"image/jpg"] ||
+      [response.MIMEType isEqualToString:@"image/png"] ||
+      [response.MIMEType isEqualToString:@"image/gif"]) {
+    return [UIImage imageWithData:processedData];
+  }
+  
+  if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound) {
+    Class clazz = NSClassFromString(@"NSJSONSerialization");
+    if (nil != clazz) {
+      processedData = [clazz JSONObjectWithData:data options:kNilOptions error:nil];
+    }
+  }
+  
+  return processedData;
+}
+
 - (id)initWithRequest:(MNURLRequest *)request queue:(MNURLRequestQueue *)queue {
   if (self = [super init]) {
     self.request     = request;
     self.queue       = queue;
     self.parse_queue = dispatch_queue_create("com.minimal.parse", 0);
     
-    self.connection = [[NSURLConnection alloc] initWithRequest:self.request
-                                                      delegate:self startImmediately:NO];
-    
-    [self.connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-    [self.connection start];
+    [self start];
   }
   return self;
+}
+
+- (NSURLConnection *)connection {
+  if (nil == _connection) {
+    _connection = [[NSURLConnection alloc] initWithRequest:self.request
+                                                  delegate:self 
+                                          startImmediately:NO];
+    
+    [_connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+  }
+  return _connection;
 }
 
 - (void)dealloc {
   dispatch_release(self.parse_queue);
 }
 
-- (id)process {
-  id data = self.responseData;
+- (id)process {  
+  return [[self class] process:self.response data:self.responseData];
+}
 
-  if ([self.response.MIMEType isEqualToString:@"image/jpeg"] || 
-      [self.response.MIMEType isEqualToString:@"image/jpg"] ||
-      [self.response.MIMEType isEqualToString:@"image/png"] ||
-      [self.response.MIMEType isEqualToString:@"image/gif"]) {
-    return [UIImage imageWithData:self.responseData];
-  }
+- (void)start {
+  __block __typeof__(self) _self = self;
   
-  if ([[self.response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound) {
-    Class clazz = NSClassFromString(@"NSJSONSerialization");
-    if (nil != clazz) {
-      data = [clazz JSONObjectWithData:data options:kNilOptions error:nil];
-    }
-  }
-  
-  return data;
+  dispatch_async(self.parse_queue, ^{
+    NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:_self.request];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if (cachedResponse) {
+        [_self.queue loader:_self success:[[self class] process:(NSHTTPURLResponse *)cachedResponse.response data:cachedResponse.data]];
+      } else {
+        [_self.connection start];
+      }
+    });
+  });
 }
 
 - (void)cancel {
@@ -80,7 +106,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSHTTPURLResponse *)response {
   self.response = response;
-  
+
   NSDictionary *headers = [response allHeaderFields];
   int contentLength = [[headers objectForKey:@"Content-Length"] intValue];
   
@@ -92,13 +118,13 @@
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse {
-  return nil;
+  return cachedResponse;
 }
 
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite {
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {    
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (self.request.cancelled) {
     return;
   }

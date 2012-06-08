@@ -98,6 +98,7 @@
 
 - (void)didFinish:(MNURLRequestLoader *)loader {
   [self.loaders removeObject:loader];
+  
   dispatch_semaphore_signal(self.request_lock);
 }
 
