@@ -30,23 +30,25 @@
 @synthesize connection = _connection, queue = _queue, parse_queue;
 
 + (id)process:(NSHTTPURLResponse *)response data:(NSData *)data {
-  id processedData = data;
+//  id processedData = data;
   
-  if ([response.MIMEType isEqualToString:@"image/jpeg"] || 
-      [response.MIMEType isEqualToString:@"image/jpg"] ||
-      [response.MIMEType isEqualToString:@"image/png"] ||
-      [response.MIMEType isEqualToString:@"image/gif"]) {
-    return [UIImage imageWithData:processedData];
-  }
-  
-  if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound) {
-    Class clazz = NSClassFromString(@"NSJSONSerialization");
-    if (nil != clazz) {
-      processedData = [clazz JSONObjectWithData:data options:kNilOptions error:nil];
+  @autoreleasepool {
+    if ([response.MIMEType isEqualToString:@"image/jpeg"] || 
+        [response.MIMEType isEqualToString:@"image/jpg"] ||
+        [response.MIMEType isEqualToString:@"image/png"] ||
+        [response.MIMEType isEqualToString:@"image/gif"]) {
+      return [UIImage imageWithData:data];
     }
+    
+    if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound) {
+      Class clazz = NSClassFromString(@"NSJSONSerialization");
+      if (nil != clazz) {
+        return [clazz JSONObjectWithData:data options:kNilOptions error:nil];
+      }
+    }
+    
+    return data;
   }
-  
-  return processedData;
 }
 
 - (id)initWithRequest:(MNURLRequest *)request queue:(MNURLRequestQueue *)queue {
@@ -80,15 +82,16 @@
 }
 
 - (void)start {
-  __block __typeof__(self) _self = self;
+  __weak id _self = self;
   
   dispatch_async(self.parse_queue, ^{
-    NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:_self.request];
+    __weak NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:[_self request]];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
       if (cachedResponse) {
-        [_self.queue loader:_self success:[[self class] process:(NSHTTPURLResponse *)cachedResponse.response data:cachedResponse.data]];
+        [[_self queue] loader:_self success:[MNURLRequestLoader process:(NSHTTPURLResponse *)cachedResponse.response data:cachedResponse.data]];
       } else {
-        [_self.connection start];
+        [[_self connection] start];
       }
     });
   });
@@ -137,16 +140,15 @@
     return;
   }
   
-  __block __typeof__(self) _self = self;
+  __weak id _self = self;
   
   dispatch_async(self.parse_queue, ^{
     id data = [_self process];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-      [_self.queue loader:self success:data];
-      
-      _self.responseData = nil;
-      _self.connection = nil;
+      [[_self queue] loader:self success:data];
+      [_self setResponseData:nil];
+      [_self setConnection:nil];
     });
   });
 }

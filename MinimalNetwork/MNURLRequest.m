@@ -106,7 +106,8 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 - (MNURLRequest *(^)(MNRequestSuccessBlock))success {
-  __block id _self = self;
+  __weak id _self = self;
+  
   return ^MNURLRequest *(MNRequestSuccessBlock block) {
     [_self setSuccessBlock:block];
     return self;
@@ -114,7 +115,8 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 - (MNURLRequest *(^)(MNRequestFailureBlock))failure {
-  __block id _self = self;
+  __weak id _self = self;
+  
   return ^MNURLRequest *(MNRequestFailureBlock block) {
     [_self setFailureBlock:block];
     return self;

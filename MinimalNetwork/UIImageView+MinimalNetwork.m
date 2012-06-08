@@ -37,7 +37,7 @@ static char kMNImageURLObjectKey;
   [self.mn_request cancel];
   self.image = nil;
   
-  __block id _self = self;
+  __weak id _self = self;
   
   self.mn_request = GET(url).
     success(^(MNURLRequest *request, UIImage *image){
