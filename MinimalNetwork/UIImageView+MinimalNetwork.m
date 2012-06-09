@@ -34,6 +34,10 @@ static char kMNImageURLObjectKey;
 }
 
 - (void)load:(NSString *)url {
+  if (nil == url || ![url isKindOfClass:[NSString class]]) {
+    return;
+  }
+  
   [self.mn_request cancel];
   self.image = nil;
   
