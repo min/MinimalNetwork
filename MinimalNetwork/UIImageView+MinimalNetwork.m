@@ -43,7 +43,7 @@ static char kMNImageURLObjectKey;
   
   __weak id _self = self;
   
-  self.mn_request = GET(url).
+  self.mn_request = MN_GET(url).
     success(^(MNURLRequest *request, UIImage *image){
       [_self setImage:image];
     }).

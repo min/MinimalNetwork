@@ -29,7 +29,7 @@
 @synthesize request = _request, response = _response, responseData = _responseData;
 @synthesize connection = _connection, queue = _queue, parse_queue;
 
-+ (id)process:(NSHTTPURLResponse *)response data:(NSData *)data {
++ (id)process:(NSHTTPURLResponse *)response data:(NSData *)data request:(NSURLRequest *)request {
 //  id processedData = data;
   
   @autoreleasepool {
@@ -37,10 +37,13 @@
         [response.MIMEType isEqualToString:@"image/jpg"] ||
         [response.MIMEType isEqualToString:@"image/png"] ||
         [response.MIMEType isEqualToString:@"image/gif"]) {
+      
+      NSLog(@"caching: %@", request);
+      [[NSURLCache sharedURLCache] storeCachedResponse:[[NSCachedURLResponse alloc] initWithResponse:response data:data] forRequest:request];
+      
       return [UIImage imageWithData:data];
     }
-    
-    if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound) {
+    if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound || [response.MIMEType isEqualToString:@"text/javascript"]) {
       Class clazz = NSClassFromString(@"NSJSONSerialization");
       if (nil != clazz) {
         return [clazz JSONObjectWithData:data options:kNilOptions error:nil];
@@ -78,18 +81,23 @@
 }
 
 - (id)process {  
-  return [[self class] process:self.response data:self.responseData];
+  return [[self class] process:self.response data:self.responseData request:self.request];
 }
 
 - (void)start {
   __weak id _self = self;
   
   dispatch_async(self.parse_queue, ^{
+
     __weak NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:[_self request]];
+    
+    NSLog(@"request: %@", cachedResponse);
     
     dispatch_async(dispatch_get_main_queue(), ^{
       if (cachedResponse) {
-        [[_self queue] loader:_self success:[MNURLRequestLoader process:(NSHTTPURLResponse *)cachedResponse.response data:cachedResponse.data]];
+        NSLog(@"cached");
+        
+        [[_self queue] loader:_self success:[MNURLRequestLoader process:(NSHTTPURLResponse *)cachedResponse.response data:cachedResponse.data request:self.request]];
       } else {
         [[_self connection] start];
       }
@@ -129,6 +137,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (self.request.cancelled) {
+    NSLog(@"returning");
     return;
   }
   if (self.response.statusCode >= 300) {

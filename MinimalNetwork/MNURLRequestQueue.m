@@ -68,9 +68,10 @@
   
   dispatch_async(self.request_queue, ^{
     dispatch_semaphore_wait(self.request_lock, DISPATCH_TIME_FOREVER);
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self next];
-    });
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//      [self next];
+//    });
+    [self next];
   });
 }
 

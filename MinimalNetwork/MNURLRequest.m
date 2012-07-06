@@ -34,6 +34,31 @@
   return string;
 }
 
+- (NSDictionary *)mn_queryParameters {
+  NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+  NSArray *components = [[self componentsSeparatedByString:@"&"] reverseObjectEnumerator];
+  for (NSString *component in components) {
+    if ([component length] == 0) {
+      continue;
+    }
+      
+    NSRange pos = [component rangeOfString:@"="];
+    NSString *key;
+    NSString *val;
+    if (pos.location == NSNotFound) {
+      key = [component mn_escape];
+      val = @"";
+    } else {
+      key = [[component substringToIndex:pos.location] mn_escape];
+      val = [[component substringFromIndex:pos.location + pos.length] mn_escape];
+    }
+    if (!key) key = @"";
+    if (!val) val = @"";
+    [parameters setObject:val forKey:key];
+  }
+  return parameters;
+}
+
 @end
 
 @implementation NSDictionary(MNURLRequestAdditions)
@@ -63,7 +88,7 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 @implementation MNURLRequest
 
 @synthesize parameters = _parameters;
-@synthesize successBlock, failureBlock;
+@synthesize successBlock, failureBlock, beforeBlock;
 @synthesize cancelled = _cancelled;
 
 - (id)initWithURL:(NSURL *)URL 
@@ -85,6 +110,9 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 - (void)prepare {  
+  if (self.beforeBlock) {
+    self.beforeBlock(self);
+  }
   if (self.parameters && [self.parameters isKindOfClass:[NSDictionary class]] && self.parameters.count > 0) {
     NSString *method = self.HTTPMethod;
     if ([method isEqualToString:@"GET"] || [method isEqualToString:@"HEAD"] || [method isEqualToString:@"DELETE"]) {
@@ -110,7 +138,7 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
   
   return ^MNURLRequest *(MNRequestSuccessBlock block) {
     [_self setSuccessBlock:block];
-    return self;
+    return _self;
   };
 }
 
@@ -119,7 +147,16 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
   
   return ^MNURLRequest *(MNRequestFailureBlock block) {
     [_self setFailureBlock:block];
-    return self;
+    return _self;
+  };
+}
+
+- (MNURLRequest *(^)(MNRequestBlock))before {
+  __weak id _self = self;
+  
+  return ^MNURLRequest *(MNRequestBlock block) {
+    [_self setBeforeBlock:block];
+    return _self;
   };
 }
 
@@ -136,7 +173,7 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 
 + (void)request:(NSURL *)URL 
          method:(NSString *)method
-         before:(MNRequessBlock)before
+         before:(MNRequestBlock)before
         success:(MNRequestSuccessBlock)success
         failure:(MNRequestFailureBlock)failure {
   MNURLRequest *request = [[MNURLRequest alloc] initWithURL:URL];
@@ -155,14 +192,22 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 
 + (MNURLRequest *)get:(NSString *)URLString {
   MNURLRequest *request = [[MNURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]];
-  request.cachePolicy = NSURLRequestReloadIgnoringCacheData;
+  request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
   request.HTTPMethod = @"GET";
   
   return request;
 }
 
++ (MNURLRequest *)post:(NSString *)URLString {
+  MNURLRequest *request = [[MNURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]];
+  request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
+  request.HTTPMethod = @"POST";
+  
+  return request;
+}
+
 + (void)get:(NSURL *)URL 
-     before:(MNRequessBlock)before
+     before:(MNRequestBlock)before
     success:(MNRequestSuccessBlock)success
     failure:(MNRequestFailureBlock)failure {
   
@@ -175,7 +220,7 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 + (void)put:(NSURL *)URL 
-     before:(MNRequessBlock)before
+     before:(MNRequestBlock)before
     success:(MNRequestSuccessBlock)success
     failure:(MNRequestFailureBlock)failure {
   
@@ -188,7 +233,7 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 + (void)post:(NSURL *)URL 
-      before:(MNRequessBlock)before
+      before:(MNRequestBlock)before
      success:(MNRequestSuccessBlock)success
      failure:(MNRequestFailureBlock)failure {
   
@@ -201,7 +246,7 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 + (void)delete:(NSURL *)URL 
-        before:(MNRequessBlock)before
+        before:(MNRequestBlock)before
        success:(MNRequestSuccessBlock)success
        failure:(MNRequestFailureBlock)failure {
   
