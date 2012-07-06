@@ -8,6 +8,7 @@
 
 #import "MNURLRequestQueue.h"
 #import "MNURLRequestLoader.h"
+#import <UIKit/UIKit.h>
 
 @interface MNURLRequestQueue()
 
@@ -24,7 +25,7 @@
 @implementation MNURLRequestQueue
 
 @synthesize request_lock, request_queue;
-@synthesize requests, loaders;
+@synthesize requests, loaders = _loaders;
 
 + (MNURLRequestQueue *)mainQueue {
   static dispatch_once_t network_predicate;
@@ -55,37 +56,48 @@
 - (void)load:(MNURLRequest *)request {
   if (request.cancelled) return;
   
+  MNNetworkRequestStarted();
   MNURLRequestLoader *loader = 
     [[MNURLRequestLoader alloc] initWithRequest:request 
                                        queue:self];
   
-  [self.loaders addObject:loader];
-  [self.requests removeObject:request];
+  @synchronized(self.loaders) {
+    [self.loaders addObject:loader];
+    [self.requests removeObject:request];
+  }
 }
 
 - (void)queue:(MNURLRequest *)request {
-  [self.requests insertObject:request atIndex:0];
+  @synchronized(self.requests) {
+    [self.requests insertObject:request atIndex:0];
+  }
   
   dispatch_async(self.request_queue, ^{
     dispatch_semaphore_wait(self.request_lock, DISPATCH_TIME_FOREVER);
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//      [self next];
-//    });
     [self next];
   });
 }
 
 - (void)cancelAll {
-  [self.requests removeAllObjects];
+  @synchronized(self.requests) {
+    [self.requests removeAllObjects];
+  }
+  
+  MNNetworkRequestFinished();
 }
 
 - (void)cancel:(MNURLRequest *)request {
   request.cancelled = YES;
-  [self.requests removeObject:request];
+  
+  @synchronized(self.requests) {
+    [self.requests removeObject:request];
+  }
   
   NSMutableArray *cancelledLoaders = [NSMutableArray arrayWithCapacity:0];
   
-  for (MNURLRequestLoader *loader in self.loaders) {
+  NSArray *loaders = [self.loaders copy];
+  
+  for (MNURLRequestLoader *loader in loaders) {
     if (request == loader.request) {
       [loader cancel];
       [cancelledLoaders addObject:loader];
@@ -94,13 +106,18 @@
   
   for (MNURLRequestLoader *loader in cancelledLoaders) {
     [self didFinish:loader];
+    MNNetworkRequestFinished();
   }
 }
 
 - (void)didFinish:(MNURLRequestLoader *)loader {
-  [self.loaders removeObject:loader];
+  @synchronized(self.loaders) {
+    [self.loaders removeObject:loader];
+  }
   
   dispatch_semaphore_signal(self.request_lock);
+  
+  MNNetworkRequestFinished();
 }
 
 - (void)loader:(MNURLRequestLoader *)loader success:(id)data {

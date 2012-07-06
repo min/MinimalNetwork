@@ -38,9 +38,10 @@
         [response.MIMEType isEqualToString:@"image/png"] ||
         [response.MIMEType isEqualToString:@"image/gif"]) {
       
-      NSLog(@"caching: %@", request);
-      [[NSURLCache sharedURLCache] storeCachedResponse:[[NSCachedURLResponse alloc] initWithResponse:response data:data] forRequest:request];
-      
+//      if (nil != request) {
+//        [[NSURLCache sharedURLCache] storeCachedResponse:[[NSCachedURLResponse alloc] initWithResponse:response data:data] forRequest:request];
+//      }
+
       return [UIImage imageWithData:data];
     }
     if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound || [response.MIMEType isEqualToString:@"text/javascript"]) {
@@ -76,7 +77,7 @@
   return _connection;
 }
 
-- (void)dealloc {
+- (void)dealloc {  
   dispatch_release(self.parse_queue);
 }
 
@@ -85,18 +86,21 @@
 }
 
 - (void)start {
+  if (nil == self.request || self.request.cancelled) {
+    return;
+  }
+  
   __weak id _self = self;
   
   dispatch_async(self.parse_queue, ^{
 
-    __weak NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:[_self request]];
-    
-    NSLog(@"request: %@", cachedResponse);
+    if (nil == [_self request]) {
+      return;
+    }
+    NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:[_self request]];
     
     dispatch_async(dispatch_get_main_queue(), ^{
       if (cachedResponse) {
-        NSLog(@"cached");
-        
         [[_self queue] loader:_self success:[MNURLRequestLoader process:(NSHTTPURLResponse *)cachedResponse.response data:cachedResponse.data request:self.request]];
       } else {
         [[_self connection] start];
@@ -137,7 +141,6 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (self.request.cancelled) {
-    NSLog(@"returning");
     return;
   }
   if (self.response.statusCode >= 300) {

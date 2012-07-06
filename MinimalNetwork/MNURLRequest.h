@@ -6,6 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+void MNNetworkRequestStarted(void);
+void MNNetworkRequestFinished(void);
+
+
 @interface NSString(MNURLRequestAdditions)
 
 - (NSString *)mn_escape;
