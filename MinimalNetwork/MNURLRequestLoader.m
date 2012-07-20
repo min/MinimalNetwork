@@ -39,7 +39,7 @@
         [response.MIMEType isEqualToString:@"image/gif"]) {
       
       [[NSURLCache sharedURLCache] storeCachedResponse:[[NSCachedURLResponse alloc] initWithResponse:response data:data] forRequest:request];
-      
+
       return [UIImage imageWithData:data];
     }
     if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound || [response.MIMEType isEqualToString:@"text/javascript"]) {
@@ -73,7 +73,7 @@
   return _connection;
 }
 
-- (void)dealloc {
+- (void)dealloc {  
   dispatch_release(self.parse_queue);
 }
 

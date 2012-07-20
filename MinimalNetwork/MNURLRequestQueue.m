@@ -8,6 +8,7 @@
 
 #import "MNURLRequestQueue.h"
 #import "MNURLRequestLoader.h"
+#import <UIKit/UIKit.h>
 
 @interface MNURLRequestQueue()
 
@@ -19,7 +20,7 @@
 
 @implementation MNURLRequestQueue
 
-@synthesize loaders;
+@synthesize loaders = _loaders;
 
 + (MNURLRequestQueue *)mainQueue {
   static dispatch_once_t network_predicate;
@@ -62,7 +63,9 @@
   
   NSMutableArray *cancelledLoaders = [NSMutableArray arrayWithCapacity:0];
   
-  for (MNURLRequestLoader *loader in self.loaders) {
+  NSArray *loaders = [self.loaders copy];
+  
+  for (MNURLRequestLoader *loader in loaders) {
     if (request == loader.request) {
       [loader cancel];
       [cancelledLoaders addObject:loader];
@@ -71,6 +74,7 @@
   
   for (MNURLRequestLoader *loader in cancelledLoaders) {
     [self didFinish:loader];
+    MNNetworkRequestFinished();
   }
 }
 

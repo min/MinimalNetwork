@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+void MNNetworkRequestStarted(void);
+void MNNetworkRequestFinished(void);
+
 @interface NSMutableArray(MNURLRequestAdditions)
 
 - (id)mn_dequeue;
