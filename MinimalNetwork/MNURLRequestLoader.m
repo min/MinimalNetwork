@@ -30,27 +30,23 @@
 @synthesize connection = _connection, queue = _queue, parse_queue;
 
 + (id)process:(NSHTTPURLResponse *)response data:(NSData *)data request:(NSURLRequest *)request {
-//  id processedData = data;
-  
-  @autoreleasepool {
-    if ([response.MIMEType isEqualToString:@"image/jpeg"] || 
-        [response.MIMEType isEqualToString:@"image/jpg"] ||
-        [response.MIMEType isEqualToString:@"image/png"] ||
-        [response.MIMEType isEqualToString:@"image/gif"]) {
-      
-      [[NSURLCache sharedURLCache] storeCachedResponse:[[NSCachedURLResponse alloc] initWithResponse:response data:data] forRequest:request];
-
-      return [UIImage imageWithData:data];
-    }
-    if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound || [response.MIMEType isEqualToString:@"text/javascript"]) {
-      Class clazz = NSClassFromString(@"NSJSONSerialization");
-      if (nil != clazz) {
-        return [clazz JSONObjectWithData:data options:kNilOptions error:nil];
-      }
-    }
+  if ([response.MIMEType isEqualToString:@"image/jpeg"] ||
+      [response.MIMEType isEqualToString:@"image/jpg"] ||
+      [response.MIMEType isEqualToString:@"image/png"] ||
+      [response.MIMEType isEqualToString:@"image/gif"]) {
     
-    return data;
+    [[NSURLCache sharedURLCache] storeCachedResponse:[[NSCachedURLResponse alloc] initWithResponse:response data:data] forRequest:request];
+
+    return [UIImage imageWithData:data];
   }
+  if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound || [response.MIMEType isEqualToString:@"text/javascript"]) {
+    Class clazz = NSClassFromString(@"NSJSONSerialization");
+    if (nil != clazz) {
+      return [clazz JSONObjectWithData:data options:kNilOptions error:nil];
+    }
+  }
+  
+  return data;
 }
 
 - (id)initWithRequest:(MNURLRequest *)request queue:(MNURLRequestQueue *)queue {
@@ -82,12 +78,7 @@
 }
 
 - (void)start {
-  NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:[self request]];
-  if (cachedResponse) {
-    [[self queue] loader:self success:[MNURLRequestLoader process:(NSHTTPURLResponse *)cachedResponse.response data:cachedResponse.data request:self.request]];
-  } else {
-    [[self connection] start];
-  }
+  [[self connection] start];
 }
 
 - (void)cancel {
@@ -133,15 +124,13 @@
     return;
   }
   
-  __weak id _self = self;
+  __block id data = nil;
   
   dispatch_async(self.parse_queue, ^{
-    id data = [_self process];
+    data = [self process];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-      [[_self queue] loader:self success:data];
-      [_self setResponseData:nil];
-      [_self setConnection:nil];
+      [self.queue loader:self success:data];
     });
   });
 }

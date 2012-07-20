@@ -189,29 +189,29 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 - (MNURLRequest *(^)(MNRequestSuccessBlock))success {
-  __weak id _self = self;
-  
   return ^MNURLRequest *(MNRequestSuccessBlock block) {
-    [_self setSuccessBlock:block];
-    return _self;
+    self.successBlock = block;
+    return self;
   };
 }
 
 - (MNURLRequest *(^)(MNRequestFailureBlock))failure {
-  __weak id _self = self;
-  
   return ^MNURLRequest *(MNRequestFailureBlock block) {
-    [_self setFailureBlock:block];
-    return _self;
+    self.failureBlock = block;
+    return self;
   };
 }
 
 - (MNURLRequest *(^)(MNRequestBlock))before {
-  __weak id _self = self;
-  
   return ^MNURLRequest *(MNRequestBlock block) {
-    [_self setBeforeBlock:block];
-    return _self;
+    self.beforeBlock = block;
+    return self;
+  };
+}
+
+- (MNURLRequest *(^)(MNRequestParseBlock))parse {
+  return ^MNURLRequest *(MNRequestParseBlock parse) {
+    return self;
   };
 }
 
@@ -224,25 +224,6 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 
 - (void)cancel {
   [[MNURLRequestQueue mainQueue] cancel:self];
-}
-
-+ (void)request:(NSURL *)URL 
-         method:(NSString *)method
-         before:(MNRequestBlock)before
-        success:(MNRequestSuccessBlock)success
-        failure:(MNRequestFailureBlock)failure {
-  MNURLRequest *request = [[MNURLRequest alloc] initWithURL:URL];
-  
-  __weak MNURLRequest *_request = request;
-  
-  if (before) {
-    before(_request);
-  }
-  
-  request.successBlock = success;
-  request.failureBlock = failure;
-  
-  MNRequestWithMethod(request, method);
 }
 
 + (MNURLRequest *)get:(NSString *)URLString {
@@ -259,58 +240,6 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
   request.HTTPMethod = @"POST";
   
   return request;
-}
-
-+ (void)get:(NSURL *)URL 
-     before:(MNRequestBlock)before
-    success:(MNRequestSuccessBlock)success
-    failure:(MNRequestFailureBlock)failure {
-  
-  [self request:URL 
-         method:@"GET" 
-         before:before 
-        success:success 
-        failure:failure
-   ];
-}
-
-+ (void)put:(NSURL *)URL 
-     before:(MNRequestBlock)before
-    success:(MNRequestSuccessBlock)success
-    failure:(MNRequestFailureBlock)failure {
-  
-  [self request:URL 
-         method:@"PUT" 
-         before:before 
-        success:success 
-        failure:failure
-   ];
-}
-
-+ (void)post:(NSURL *)URL 
-      before:(MNRequestBlock)before
-     success:(MNRequestSuccessBlock)success
-     failure:(MNRequestFailureBlock)failure {
-  
-  [self request:URL 
-         method:@"POST" 
-         before:before 
-        success:success 
-        failure:failure
-   ];
-}
-
-+ (void)delete:(NSURL *)URL 
-        before:(MNRequestBlock)before
-       success:(MNRequestSuccessBlock)success
-       failure:(MNRequestFailureBlock)failure {
-  
-  [self request:URL 
-         method:@"DELETE" 
-         before:before 
-        success:success 
-        failure:failure
-   ];
 }
 
 @end

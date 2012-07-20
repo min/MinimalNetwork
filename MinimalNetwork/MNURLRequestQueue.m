@@ -39,8 +39,10 @@
 }
 
 - (void)next {
-  MNURLRequestLoader *loader = [self.loaders mn_dequeue];
-  [loader start];
+  if (self.loaders && self.loaders.count > 0) {
+    MNURLRequestLoader *loader = [self.loaders objectAtIndex:0];
+    [loader start];
+  }
 }
 
 - (void)queue:(MNURLRequest *)request {
@@ -49,6 +51,7 @@
                                         queue:self];
   
   [self.loaders addObject:loader];
+  NSLog(@"loaders: %@", self.loaders);
   if (self.loaders.count <= 10) {
     [self next];
   }
@@ -63,9 +66,9 @@
   
   NSMutableArray *cancelledLoaders = [NSMutableArray arrayWithCapacity:0];
   
-  NSArray *loaders = [self.loaders copy];
+  NSLog(@"loaders: %@", self.loaders);
   
-  for (MNURLRequestLoader *loader in loaders) {
+  for (MNURLRequestLoader *loader in self.loaders) {
     if (request == loader.request) {
       [loader cancel];
       [cancelledLoaders addObject:loader];

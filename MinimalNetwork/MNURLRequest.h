@@ -34,7 +34,9 @@ void MNNetworkRequestFinished(void);
 
 typedef void (^MNRequestSuccessBlock)(id request, id data);
 typedef void (^MNRequestFailureBlock)(id request, NSError *error);
+typedef void (^MNRequestParseBlock)(NSData *data);
 typedef void (^MNRequestBlock)(id request);
+
 
 @interface MNURLRequest : NSMutableURLRequest
 
@@ -47,20 +49,11 @@ typedef void (^MNRequestBlock)(id request);
 @property(readonly) MNURLRequest *(^success)(MNRequestSuccessBlock block);
 @property(readonly) MNURLRequest *(^failure)(MNRequestFailureBlock block);
 @property(readonly) MNURLRequest *(^before)(MNRequestBlock block);
+@property(readonly) MNURLRequest *(^parse)(MNRequestParseBlock block);
 @property(readonly) MNURLRequest *(^send)();
 
 + (MNURLRequest *)get:(NSString *)URLString;
 + (MNURLRequest *)post:(NSString *)URLString;
-
-+ (void)get:(NSURL *)URL 
-     before:(MNRequestBlock)before
-    success:(MNRequestSuccessBlock)success
-    failure:(MNRequestFailureBlock)failure;
-
-+ (void)post:(NSURL *)URL 
-      before:(MNRequestBlock)before
-     success:(MNRequestSuccessBlock)success
-     failure:(MNRequestFailureBlock)failure;
 
 - (void)cancel;
 
