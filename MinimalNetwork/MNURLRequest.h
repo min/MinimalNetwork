@@ -6,6 +6,13 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+@interface NSMutableArray(MNURLRequestAdditions)
+
+- (id)mn_dequeue;
+- (id)mn_enqueue:(id)object;
+
+@end
+
 @interface NSString(MNURLRequestAdditions)
 
 - (NSString *)mn_escape;

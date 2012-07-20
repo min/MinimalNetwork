@@ -20,6 +20,27 @@
 
 @end
 
+@implementation NSMutableArray(MNURLRequestAdditions)
+
+- (id)mn_dequeue {
+  if (self.count == 0) return nil;
+  
+  id firstObject = [self objectAtIndex:0];
+  if (firstObject != nil) {
+    [self removeObject:firstObject];
+    return firstObject;
+  }
+
+  return nil;
+}
+
+- (id)mn_enqueue:(id)object {
+  [self addObject:object];
+  return object;
+}
+
+@end
+
 @implementation NSString(MNURLRequestAdditions)
 
 - (NSString *)mn_escape {

@@ -38,7 +38,6 @@
         [response.MIMEType isEqualToString:@"image/png"] ||
         [response.MIMEType isEqualToString:@"image/gif"]) {
       
-      NSLog(@"caching: %@", request);
       [[NSURLCache sharedURLCache] storeCachedResponse:[[NSCachedURLResponse alloc] initWithResponse:response data:data] forRequest:request];
       
       return [UIImage imageWithData:data];
@@ -59,8 +58,6 @@
     self.request     = request;
     self.queue       = queue;
     self.parse_queue = dispatch_queue_create("com.minimal.parse", 0);
-    
-    [self start];
   }
   return self;
 }
@@ -71,7 +68,7 @@
                                                   delegate:self 
                                           startImmediately:NO];
     
-    [_connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    [_connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
   }
   return _connection;
 }
@@ -85,24 +82,12 @@
 }
 
 - (void)start {
-  __weak id _self = self;
-  
-  dispatch_async(self.parse_queue, ^{
-
-    __weak NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:[_self request]];
-    
-    NSLog(@"request: %@", cachedResponse);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      if (cachedResponse) {
-        NSLog(@"cached");
-        
-        [[_self queue] loader:_self success:[MNURLRequestLoader process:(NSHTTPURLResponse *)cachedResponse.response data:cachedResponse.data request:self.request]];
-      } else {
-        [[_self connection] start];
-      }
-    });
-  });
+  NSCachedURLResponse *cachedResponse = [[NSURLCache sharedURLCache] cachedResponseForRequest:[self request]];
+  if (cachedResponse) {
+    [[self queue] loader:self success:[MNURLRequestLoader process:(NSHTTPURLResponse *)cachedResponse.response data:cachedResponse.data request:self.request]];
+  } else {
+    [[self connection] start];
+  }
 }
 
 - (void)cancel {
@@ -137,7 +122,6 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (self.request.cancelled) {
-    NSLog(@"returning");
     return;
   }
   if (self.response.statusCode >= 300) {
