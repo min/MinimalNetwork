@@ -21,9 +21,23 @@ static char kMNImageURLObjectKey;
 
 @dynamic mn_request;
 
++ (NSCache *)mn_cache {
+  return nil;
+}
+
 @end
 
 @implementation UIImageView (MinimalNetwork)
+
++ (NSCache *)mn_cache {
+  static NSCache *kImageCache = nil;
+  static dispatch_once_t once_predicate;
+  dispatch_once(&once_predicate, ^{
+    kImageCache = [[NSCache alloc] init];
+  });
+  
+  return kImageCache;
+}
 
 - (MNURLRequest *)mn_request {
   return (MNURLRequest *)objc_getAssociatedObject(self, &kMNImageURLObjectKey);
@@ -33,8 +47,14 @@ static char kMNImageURLObjectKey;
   objc_setAssociatedObject(self, &kMNImageURLObjectKey, request, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)load:(NSString *)url {
+- (void)mn_load:(NSString *)url {
   if (nil == url || ![url isKindOfClass:[NSString class]]) {
+    return;
+  }
+  
+  UIImage *image = [[[self class] mn_cache] objectForKey:url];
+  if (image && [image isKindOfClass:[UIImage class]]) {
+    self.image = image;
     return;
   }
   
@@ -44,13 +64,14 @@ static char kMNImageURLObjectKey;
   __weak id _self = self;
   
   self.mn_request = MN_GET(url).
-    success(^(MNURLRequest *request, UIImage *image){
+    success(^(MNURLRequest *request, UIImage *image) {
+      [[[self class] mn_cache] setObject:image forKey:request.URL.absoluteString];
       [_self setImage:image];
     }).
     send();
 }
 
-- (void)cancel {
+- (void)mn_cancel {
   if (self.mn_request) {
     [self.mn_request cancel];
   }
