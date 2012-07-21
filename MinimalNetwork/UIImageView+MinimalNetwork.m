@@ -9,25 +9,11 @@
 #import "UIImageView+MinimalNetwork.h"
 #import <objc/runtime.h>
 
-static char kMNImageURLObjectKey;
-
-@interface UIImageView (_MinimalNetwork)
-
-@property (readwrite, nonatomic, retain, setter = mn_setRequest:) MNURLRequest *mn_request;
-
-@end
-
-@implementation UIImageView (_MinimalNetwork)
-
-@dynamic mn_request;
-
-+ (NSCache *)mn_cache {
-  return nil;
-}
-
-@end
+static char const * const kMNImageURLObjectKey = "MNImageURLObjectKey";
 
 @implementation UIImageView (MinimalNetwork)
+
+@dynamic mn_request;
 
 + (NSCache *)mn_cache {
   static NSCache *kImageCache = nil;
@@ -40,11 +26,11 @@ static char kMNImageURLObjectKey;
 }
 
 - (MNURLRequest *)mn_request {
-  return (MNURLRequest *)objc_getAssociatedObject(self, &kMNImageURLObjectKey);
+  return (MNURLRequest *)objc_getAssociatedObject(self, kMNImageURLObjectKey);
 }
 
-- (void)mn_setRequest:(MNURLRequest *)request {
-  objc_setAssociatedObject(self, &kMNImageURLObjectKey, request, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setMn_request:(MNURLRequest *)request {
+  objc_setAssociatedObject(self, kMNImageURLObjectKey, request, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)mn_load:(NSString *)url {
