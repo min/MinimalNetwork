@@ -16,6 +16,8 @@ MinimalNetwork is a simple HTTP library for iOS 5+.
 
 ``` objective-c
 
+NSString *maybe = @"555-5555";
+
 MN_GET(@"http://call/me/%@", maybe).
   parse(^(id data){
     // background thread
