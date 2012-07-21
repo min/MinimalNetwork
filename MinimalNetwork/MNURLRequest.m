@@ -136,7 +136,7 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 @implementation MNURLRequest
 
 @synthesize parameters = _parameters;
-@synthesize successBlock, failureBlock, beforeBlock;
+@synthesize successBlock, failureBlock, beforeBlock, parseBlock;
 @synthesize cancelled = _cancelled;
 
 + (void)initialize {
@@ -211,6 +211,7 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 
 - (MNURLRequest *(^)(MNRequestParseBlock))parse {
   return ^MNURLRequest *(MNRequestParseBlock parse) {
+    self.parseBlock = parse;
     return self;
   };
 }

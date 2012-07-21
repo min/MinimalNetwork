@@ -51,7 +51,6 @@
                                         queue:self];
   
   [self.loaders addObject:loader];
-  NSLog(@"loaders: %@", self.loaders);
   if (self.loaders.count <= 10) {
     [self next];
   }
@@ -65,8 +64,6 @@
   request.cancelled = YES;
   
   NSMutableArray *cancelledLoaders = [NSMutableArray arrayWithCapacity:0];
-  
-  NSLog(@"loaders: %@", self.loaders);
   
   for (MNURLRequestLoader *loader in self.loaders) {
     if (request == loader.request) {

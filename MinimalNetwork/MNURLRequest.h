@@ -34,7 +34,7 @@ void MNNetworkRequestFinished(void);
 
 typedef void (^MNRequestSuccessBlock)(id request, id data);
 typedef void (^MNRequestFailureBlock)(id request, NSError *error);
-typedef void (^MNRequestParseBlock)(NSData *data);
+typedef id   (^MNRequestParseBlock)(NSData *data);
 typedef void (^MNRequestBlock)(id request);
 
 
@@ -44,6 +44,7 @@ typedef void (^MNRequestBlock)(id request);
 @property(nonatomic,copy)     MNRequestSuccessBlock successBlock;
 @property(nonatomic,copy)     MNRequestFailureBlock failureBlock;
 @property(nonatomic,copy)     MNRequestBlock        beforeBlock;
+@property(nonatomic,copy)     MNRequestParseBlock   parseBlock;
 @property(nonatomic)          BOOL                  cancelled;
 
 @property(readonly) MNURLRequest *(^success)(MNRequestSuccessBlock block);

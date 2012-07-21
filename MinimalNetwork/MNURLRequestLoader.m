@@ -129,6 +129,10 @@
   dispatch_async(self.parse_queue, ^{
     data = [self process];
     
+    if (self.request.parseBlock) {
+      data = self.request.parseBlock(data);
+    }
+    
     dispatch_async(dispatch_get_main_queue(), ^{
       [self.queue loader:self success:data];
     });
