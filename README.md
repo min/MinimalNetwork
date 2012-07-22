@@ -19,16 +19,14 @@ MinimalNetwork is a simple HTTP library for iOS 5+.
 NSString *maybe = @"555-5555";
 
 MN_GET(@"http://call/me/%@", maybe).
-  parse((id)^(id data){
+  parse((id)^(id data) {
     // background thread
     return [self customParser:data];
   }).
-  success(^(MNURLRequest *request, id data){
-    // main UI thread
+  success(^(MNURLRequest *request, id data) {
     [self didFinish:data];
   }).
-  failure(^(MNURLRequest *request, NSError *error){
-    // main UI thread
+  failure(^(MNURLRequest *request, NSError *error) {
     [self showError:error]; 
   }).
   send();
@@ -41,11 +39,9 @@ request.parseBlock = (id)^(id data){
   return [self customParser:data];
 };
 request.successBlock = ^(MNURLRequest *request, id data){
-  // main UI thread
   [self didFinish:data];
 };
 request.failureBlock = ^(MNURLRequest *request, NSError *error){
-  // main UI thread
   [self showError:error]; 
 };
 [request start];
