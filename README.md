@@ -1,6 +1,6 @@
 # MinimalNetwork
 
-MinimalNetwork is a simple HTTP library for iOS 5+.
+MinimalNetwork is a simple HTTP library for iOS 5+.  This project is still under development.
 
 ## Features
 
