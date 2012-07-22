@@ -20,4 +20,5 @@
 - (void)loader:(MNURLRequestLoader *)loader success:(id)data;
 - (void)loader:(MNURLRequestLoader *)loader failure:(NSError *)error;
 
+
 @end

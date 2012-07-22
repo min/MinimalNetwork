@@ -33,9 +33,16 @@
 
 - (id)init {
   if (self = [super init]) {
+    
+    [self addObserver:self forKeyPath:@"loaders" options:(NSKeyValueChangeInsertion | NSKeyValueChangeRemoval) context:NULL];
+    
     self.loaders = [NSMutableArray arrayWithCapacity:0];
   }
   return self;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+  NSLog(@"changed");
 }
 
 - (void)next {
@@ -50,7 +57,11 @@
   [[MNURLRequestLoader alloc] initWithRequest:request
                                         queue:self];
   
+  if (self.loaders.count == 0) {
+    MNNetworkRequestStarted();
+  }
   [self.loaders addObject:loader];
+  
   if (self.loaders.count <= 10) {
     [self next];
   }
@@ -74,12 +85,14 @@
   
   for (MNURLRequestLoader *loader in cancelledLoaders) {
     [self didFinish:loader];
-    MNNetworkRequestFinished();
   }
 }
 
 - (void)didFinish:(MNURLRequestLoader *)loader {
   [self.loaders removeObject:loader];
+  if (self.loaders.count == 0) {
+    MNNetworkRequestFinished();
+  }
   [self next];
 }
 

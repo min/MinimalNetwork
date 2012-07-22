@@ -10,30 +10,15 @@
 #import "MNURLRequestQueue.h"
 #import <UIKit/UIKit.h>
 
-static int gMNNetworkRequestsCount = 0;
-static dispatch_queue_t requests_count_queue;
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void MNNetworkRequestStarted() {
-//  dispatch_async(requests_count_queue, ^{
-//    if (0 == gMNNetworkRequestsCount) {
-//      [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-//    }
-//    gMNNetworkRequestsCount++;
-//  });
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void MNNetworkRequestFinished() {
-//  dispatch_async(requests_count_queue, ^{
-//    --gMNNetworkRequestsCount;
-//    gMNNetworkRequestsCount = MAX(0, gMNNetworkRequestsCount);
-//    
-//    if (gMNNetworkRequestsCount == 0) {
-//      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-//    }
-//  });
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 @interface MNURLRequest()
@@ -138,13 +123,6 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 @synthesize parameters = _parameters;
 @synthesize successBlock, failureBlock, beforeBlock, parseBlock;
 @synthesize cancelled = _cancelled;
-
-+ (void)initialize {
-  static dispatch_once_t once_token;
-  dispatch_once(&once_token, ^{
-    requests_count_queue = dispatch_queue_create("com.min.requests", NULL);
-  });
-}
 
 - (id)initWithURL:(NSURL *)URL 
        parameters:(NSDictionary *)parameters 
