@@ -69,7 +69,7 @@ void MNNetworkRequestFinished() {
 
 - (NSDictionary *)mn_queryParameters {
   NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-  NSArray *components = [[self componentsSeparatedByString:@"&"] reverseObjectEnumerator];
+  NSEnumerator *components = [[self componentsSeparatedByString:@"&"] reverseObjectEnumerator];
   for (NSString *component in components) {
     if ([component length] == 0) {
       continue;
