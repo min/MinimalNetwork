@@ -50,6 +50,9 @@ static char const * const kMNImageURLObjectKey = "MNImageURLObjectKey";
   __weak id _self = self;
   
   self.mn_request = MN_GET(url).
+    before(^(MNURLRequest *request) {
+      request.parserClass = [MNImageResponseParser class];
+    }).
     success(^(MNURLRequest *request, UIImage *image) {
       [[[self class] mn_cache] setObject:image forKey:request.URL.absoluteString];
       [_self setImage:image];

@@ -8,5 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <MinimalNetwork/MNURLRequest.h>
+#import <MinimalNetwork/MNURLResponseParser.h>
 #import <MinimalNetwork/UIImageView+MinimalNetwork.h>
 

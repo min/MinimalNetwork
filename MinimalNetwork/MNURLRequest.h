@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "MNURLResponseParser.h"
+
 void MNNetworkRequestStarted(void);
 void MNNetworkRequestFinished(void);
 
@@ -46,6 +48,7 @@ typedef void (^MNRequestBlock)(id request);
 @property(nonatomic,copy)     MNRequestBlock        beforeBlock;
 @property(nonatomic,copy)     MNRequestParseBlock   parseBlock;
 @property(nonatomic)          BOOL                  cancelled;
+@property(nonatomic)          Class                 parserClass;
 
 @property(readonly) MNURLRequest *(^success)(MNRequestSuccessBlock block);
 @property(readonly) MNURLRequest *(^failure)(MNRequestFailureBlock block);

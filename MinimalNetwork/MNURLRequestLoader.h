@@ -18,7 +18,7 @@
 @property(nonatomic,readonly) NSMutableData     *responseData;
 @property(nonatomic,readonly) NSURLConnection   *connection;
 
-+ (id)process:(NSHTTPURLResponse *)response data:(NSData *)data request:(NSURLRequest *)request;
++ (id)process:(NSHTTPURLResponse *)response data:(NSData *)data request:(MNURLRequest *)request;
 
 - (id)initWithRequest:(MNURLRequest *)request queue:(MNURLRequestQueue *)queue;
 - (void)start;

@@ -7,13 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		391022A315800E4A0033341D /* MinimalNetwork-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 3910229B15800E4A0033341D /* MinimalNetwork-Prefix.pch */; };
-		391022A415800E4A0033341D /* MinimalNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 3910229C15800E4A0033341D /* MinimalNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		391022A515800E4A0033341D /* MNURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3910229D15800E4A0033341D /* MNURLRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		391022A615800E4A0033341D /* MNURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3910229E15800E4A0033341D /* MNURLRequest.m */; };
-		391022A715800E4A0033341D /* MNURLRequestLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3910229F15800E4A0033341D /* MNURLRequestLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		391022A815800E4A0033341D /* MNURLRequestLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 391022A015800E4A0033341D /* MNURLRequestLoader.m */; };
-		391022A915800E4A0033341D /* MNURLRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 391022A115800E4A0033341D /* MNURLRequestQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		391022AA15800E4A0033341D /* MNURLRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 391022A215800E4A0033341D /* MNURLRequestQueue.m */; };
 		3996B58115706543008F3935 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B58015706543008F3935 /* Foundation.framework */; };
 		3996B58F15706543008F3935 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B58E15706543008F3935 /* SenTestingKit.framework */; };
@@ -22,7 +17,13 @@
 		3996B59515706543008F3935 /* libMinimalNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B57D15706543008F3935 /* libMinimalNetwork.a */; };
 		3996B5B4157128C8008F3935 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B5B3157128C8008F3935 /* CFNetwork.framework */; };
 		3996B5B6157128D1008F3935 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3996B5B5157128D1008F3935 /* SystemConfiguration.framework */; };
-		39B8441D15804FC800390ABE /* UIImageView+MinimalNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B8441B15804FC800390ABE /* UIImageView+MinimalNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		39A207EB15C7934C001D4358 /* MNURLResponseParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 39A207E915C7934C001D4358 /* MNURLResponseParser.m */; };
+		39A207EE15C84D9A001D4358 /* MinimalNetwork.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3910229C15800E4A0033341D /* MinimalNetwork.h */; };
+		39A207EF15C84D9A001D4358 /* MNURLRequest.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3910229D15800E4A0033341D /* MNURLRequest.h */; };
+		39A207F015C84D9A001D4358 /* MNURLRequestLoader.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3910229F15800E4A0033341D /* MNURLRequestLoader.h */; };
+		39A207F115C84D9A001D4358 /* MNURLRequestQueue.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 391022A115800E4A0033341D /* MNURLRequestQueue.h */; };
+		39A207F215C84D9A001D4358 /* UIImageView+MinimalNetwork.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 39B8441B15804FC800390ABE /* UIImageView+MinimalNetwork.h */; };
+		39A207F315C84D9A001D4358 /* MNURLResponseParser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 39A207E815C7934C001D4358 /* MNURLResponseParser.h */; };
 		39B8441E15804FC800390ABE /* UIImageView+MinimalNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B8441C15804FC800390ABE /* UIImageView+MinimalNetwork.m */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,24 @@
 			remoteInfo = MNNetwork;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		39A207ED15C84D8B001D4358 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				39A207EE15C84D9A001D4358 /* MinimalNetwork.h in CopyFiles */,
+				39A207EF15C84D9A001D4358 /* MNURLRequest.h in CopyFiles */,
+				39A207F015C84D9A001D4358 /* MNURLRequestLoader.h in CopyFiles */,
+				39A207F115C84D9A001D4358 /* MNURLRequestQueue.h in CopyFiles */,
+				39A207F215C84D9A001D4358 /* UIImageView+MinimalNetwork.h in CopyFiles */,
+				39A207F315C84D9A001D4358 /* MNURLResponseParser.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3910229B15800E4A0033341D /* MinimalNetwork-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MinimalNetwork-Prefix.pch"; sourceTree = "<group>"; };
@@ -52,6 +71,8 @@
 		3996B59015706543008F3935 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		3996B5B3157128C8008F3935 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		3996B5B5157128D1008F3935 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		39A207E815C7934C001D4358 /* MNURLResponseParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNURLResponseParser.h; sourceTree = "<group>"; };
+		39A207E915C7934C001D4358 /* MNURLResponseParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNURLResponseParser.m; sourceTree = "<group>"; };
 		39B8441B15804FC800390ABE /* UIImageView+MinimalNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MinimalNetwork.h"; sourceTree = "<group>"; };
 		39B8441C15804FC800390ABE /* UIImageView+MinimalNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MinimalNetwork.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +115,8 @@
 				391022A215800E4A0033341D /* MNURLRequestQueue.m */,
 				39B8441B15804FC800390ABE /* UIImageView+MinimalNetwork.h */,
 				39B8441C15804FC800390ABE /* UIImageView+MinimalNetwork.m */,
+				39A207E815C7934C001D4358 /* MNURLResponseParser.h */,
+				39A207E915C7934C001D4358 /* MNURLResponseParser.m */,
 			);
 			path = MinimalNetwork;
 			sourceTree = "<group>";
@@ -130,22 +153,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		3996B57B15706543008F3935 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				391022A315800E4A0033341D /* MinimalNetwork-Prefix.pch in Headers */,
-				391022A415800E4A0033341D /* MinimalNetwork.h in Headers */,
-				391022A515800E4A0033341D /* MNURLRequest.h in Headers */,
-				391022A715800E4A0033341D /* MNURLRequestLoader.h in Headers */,
-				391022A915800E4A0033341D /* MNURLRequestQueue.h in Headers */,
-				39B8441D15804FC800390ABE /* UIImageView+MinimalNetwork.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		3996B57C15706543008F3935 /* MinimalNetwork */ = {
 			isa = PBXNativeTarget;
@@ -153,7 +160,7 @@
 			buildPhases = (
 				3996B57915706543008F3935 /* Sources */,
 				3996B57A15706543008F3935 /* Frameworks */,
-				3996B57B15706543008F3935 /* Headers */,
+				39A207ED15C84D8B001D4358 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -244,6 +251,7 @@
 				391022A815800E4A0033341D /* MNURLRequestLoader.m in Sources */,
 				391022AA15800E4A0033341D /* MNURLRequestQueue.m in Sources */,
 				39B8441E15804FC800390ABE /* UIImageView+MinimalNetwork.m in Sources */,
+				39A207EB15C7934C001D4358 /* MNURLResponseParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

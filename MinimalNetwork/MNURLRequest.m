@@ -131,6 +131,7 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
   if ((self = [self initWithURL:URL])) {
     self.successBlock = success;
     self.failureBlock = failure;
+    self.parserClass = [MNURLResponseParser class];
     
     if (parameters) {
       [self.parameters addEntriesFromDictionary:parameters];
@@ -206,7 +207,9 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 + (MNURLRequest *)get:(NSString *)URLString {
-  MNURLRequest *request = [[MNURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]];
+  NSURL *URL = [NSURL URLWithString:URLString];
+  
+  MNURLRequest *request = [[MNURLRequest alloc] initWithURL:URL];
   request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
   request.HTTPMethod = @"GET";
   

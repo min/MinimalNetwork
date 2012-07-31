@@ -33,21 +33,28 @@
 
 - (id)init {
   if (self = [super init]) {
-    
-    [self addObserver:self forKeyPath:@"loaders" options:(NSKeyValueChangeInsertion | NSKeyValueChangeRemoval) context:NULL];
-    
     self.loaders = [NSMutableArray arrayWithCapacity:0];
   }
   return self;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-  NSLog(@"changed");
-}
-
 - (void)next {
   if (self.loaders && self.loaders.count > 0) {
     MNURLRequestLoader *loader = [self.loaders objectAtIndex:0];
+    
+    if ([loader.request.URL.scheme isEqualToString:@"bundle"]) {
+      NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:loader.request.URL.host];
+
+      if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        [self loader:loader success:[[loader.request parserClass] process:[NSData dataWithContentsOfFile:path]]];
+      } else {
+        NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                             code:NSFileReadNoSuchFileError
+                                          userInfo:nil];
+        [self loader:loader failure:error];
+      }
+      return;
+    }
     [loader start];
   }
 }

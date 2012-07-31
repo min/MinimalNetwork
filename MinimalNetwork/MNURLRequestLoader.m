@@ -29,23 +29,19 @@
 @synthesize request = _request, response = _response, responseData = _responseData;
 @synthesize connection = _connection, queue = _queue, parse_queue;
 
-+ (id)process:(NSHTTPURLResponse *)response data:(NSData *)data request:(NSURLRequest *)request {
-  if ([response.MIMEType isEqualToString:@"image/jpeg"] ||
-      [response.MIMEType isEqualToString:@"image/jpg"] ||
-      [response.MIMEType isEqualToString:@"image/png"] ||
-      [response.MIMEType isEqualToString:@"image/gif"]) {
-    
-    [[NSURLCache sharedURLCache] storeCachedResponse:[[NSCachedURLResponse alloc] initWithResponse:response data:data] forRequest:request];
-
-    return [UIImage imageWithData:data];
-  }
-  if ([[response.allHeaderFields objectForKey:@"Content-Type"] rangeOfString:@"json"].location != NSNotFound || [response.MIMEType isEqualToString:@"text/javascript"]) {
-    Class clazz = NSClassFromString(@"NSJSONSerialization");
-    if (nil != clazz) {
-      return [clazz JSONObjectWithData:data options:kNilOptions error:nil];
-    }
++ (id)process:(NSHTTPURLResponse *)response data:(NSData *)data request:(MNURLRequest *)request {
+  NSString *mimeType = response.MIMEType;
+  
+  Class parserClass = request.parserClass;
+  
+  if ([mimeType isEqualToString:@"application/json"]) {
+    parserClass = [MNJSONResponseParser class];
   }
   
+  if ([parserClass respondsToSelector:@selector(process:)]) {
+    return [parserClass process:data];
+  }
+
   return data;
 }
 
