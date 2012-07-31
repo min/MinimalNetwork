@@ -18,7 +18,6 @@
 @property(nonatomic,readwrite) NSHTTPURLResponse *response;
 @property(nonatomic,readwrite) NSMutableData     *responseData;
 @property(nonatomic,readwrite) NSURLConnection   *connection;
-@property(nonatomic,assign)    dispatch_queue_t   parse_queue;
 
 - (id)process;
 
@@ -27,7 +26,7 @@
 @implementation MNURLRequestLoader
 
 @synthesize request = _request, response = _response, responseData = _responseData;
-@synthesize connection = _connection, queue = _queue, parse_queue;
+@synthesize connection = _connection, queue = _queue;
 
 + (id)process:(NSHTTPURLResponse *)response data:(NSData *)data request:(MNURLRequest *)request {
   NSString *mimeType = response.MIMEType;
@@ -49,7 +48,6 @@
   if (self = [super init]) {
     self.request     = request;
     self.queue       = queue;
-    self.parse_queue = dispatch_queue_create("com.minimal.parse", 0);
   }
   return self;
 }
@@ -66,7 +64,6 @@
 }
 
 - (void)dealloc {  
-  dispatch_release(self.parse_queue);
 }
 
 - (id)process {  
@@ -120,19 +117,7 @@
     return;
   }
   
-  __block id data = nil;
-  
-  dispatch_async(self.parse_queue, ^{
-    data = [self process];
-    
-    if (self.request.parseBlock) {
-      data = self.request.parseBlock(data);
-    }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      [self.queue loader:self success:data];
-    });
-  });
+  [self.queue loader:self success:self.responseData];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{

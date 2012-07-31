@@ -23,5 +23,6 @@
 - (id)initWithRequest:(MNURLRequest *)request queue:(MNURLRequestQueue *)queue;
 - (void)start;
 - (void)cancel;
+- (id)process;
 
 @end

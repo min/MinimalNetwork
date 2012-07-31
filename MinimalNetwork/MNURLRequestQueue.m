@@ -12,7 +12,8 @@
 
 @interface MNURLRequestQueue()
 
-@property(nonatomic,strong) NSMutableArray *loaders;
+@property(nonatomic,strong) NSMutableArray  *loaders;
+@property(nonatomic)        dispatch_queue_t parse_queue;
 
 - (void)next;
 
@@ -33,9 +34,14 @@
 
 - (id)init {
   if (self = [super init]) {
-    self.loaders = [NSMutableArray arrayWithCapacity:0];
+    self.loaders     = [NSMutableArray arrayWithCapacity:0];
+    self.parse_queue = dispatch_queue_create("com.minimal.parse", 0);
   }
   return self;
+}
+
+- (void)dealloc {
+  dispatch_release(self.parse_queue);
 }
 
 - (void)next {
@@ -46,11 +52,11 @@
       NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:loader.request.URL.host];
 
       if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        [self loader:loader success:[[loader.request parserClass] process:[NSData dataWithContentsOfFile:path]]];
+        [self loader:loader success:[NSData dataWithContentsOfFile:path]];
       } else {
         NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                              code:NSFileReadNoSuchFileError
-                                          userInfo:nil];
+                                         userInfo:nil];
         [self loader:loader failure:error];
       }
       return;
@@ -104,11 +110,23 @@
 }
 
 - (void)loader:(MNURLRequestLoader *)loader success:(id)data {
-  if (loader.request.successBlock) {
-    loader.request.successBlock(loader.request, data);
-  }
-  
   [self didFinish:loader];
+  
+  __block id parsedData = data;
+  
+  dispatch_async(self.parse_queue, ^{
+    parsedData = [MNURLRequestLoader process:loader.response data:parsedData request:loader.request];
+    
+    if (loader.request.parseBlock) {
+      parsedData = loader.request.parseBlock(parsedData);
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if (loader.request.successBlock) {
+        loader.request.successBlock(loader.request, parsedData);
+      }
+    });
+  });
 }
 
 - (void)loader:(MNURLRequestLoader *)loader failure:(NSError *)error {
