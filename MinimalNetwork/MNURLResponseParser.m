@@ -19,11 +19,6 @@
 @implementation MNJSONResponseParser
 
 + (id)process:(NSData *)data {
-  NSError *error;
-  NSLog(@"data: %@", [NSJSONSerialization JSONObjectWithData:data
-                                                     options:kNilOptions
-                                                       error:&error]);
-  NSLog(@"error: %@", error);
   return [NSJSONSerialization JSONObjectWithData:data
                                          options:kNilOptions
                                            error:nil];
