@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MinimalNetwork/MNURLRequest.h>
+#import "MNURLRequest.h"
 
 @interface UIImageView (MinimalNetwork)
 
