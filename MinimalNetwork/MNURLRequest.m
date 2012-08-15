@@ -112,7 +112,6 @@ void MNNetworkRequestFinished() {
 @end
 
 static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) {
-  [request setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
   [request setHTTPMethod:method];
   [request prepare];
   [[MNURLRequestQueue mainQueue] queue:request];
@@ -210,7 +209,6 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
   NSURL *URL = [NSURL URLWithString:URLString];
   
   MNURLRequest *request = [[MNURLRequest alloc] initWithURL:URL];
-  request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
   request.HTTPMethod = @"GET";
   
   return request;
@@ -218,7 +216,6 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 
 + (MNURLRequest *)post:(NSString *)URLString {
   MNURLRequest *request = [[MNURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]];
-  request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
   request.HTTPMethod = @"POST";
   
   return request;

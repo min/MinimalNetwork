@@ -55,7 +55,7 @@
 - (NSURLConnection *)connection {
   if (nil == _connection) {
     _connection = [[NSURLConnection alloc] initWithRequest:self.request
-                                                  delegate:self 
+                                                  delegate:self
                                           startImmediately:NO];
     
     [_connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
