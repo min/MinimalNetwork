@@ -7,22 +7,13 @@
 //
 
 @class MNURLRequest;
-@class MNURLRequestQueue;
 
 @interface MNURLRequestLoader : NSObject
 
+@property(nonatomic,readonly) MNURLRequest *request;
 
-@property(nonatomic,readonly) MNURLRequest      *request;
-@property(nonatomic,readonly) MNURLRequestQueue *queue;
-@property(nonatomic,readonly) NSHTTPURLResponse *response;
-@property(nonatomic,readonly) NSMutableData     *responseData;
-@property(nonatomic,readonly) NSURLConnection   *connection;
-
-+ (id)process:(NSHTTPURLResponse *)response data:(NSData *)data request:(MNURLRequest *)request;
-
-- (id)initWithRequest:(MNURLRequest *)request queue:(MNURLRequestQueue *)queue;
+- (id)initWithRequest:(MNURLRequest *)request;
 - (void)start;
 - (void)cancel;
-- (id)process;
 
 @end

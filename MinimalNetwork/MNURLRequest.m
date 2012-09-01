@@ -111,23 +111,25 @@ void MNNetworkRequestFinished() {
 
 @end
 
-static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) {
-  [request setHTTPMethod:method];
-  [request prepare];
-  [[MNURLRequestQueue mainQueue] queue:request];
-}
-
 @implementation MNURLRequest
 
 @synthesize parameters = _parameters;
 @synthesize successBlock, failureBlock, beforeBlock, parseBlock;
 @synthesize cancelled = _cancelled;
 
+- (id)initWithURL:(NSURL *)URL method:(NSString *)method {
+  if ((self = [self initWithURL:URL])) {
+    self.HTTPMethod = method;
+  }
+  return self;
+}
+
 - (id)initWithURL:(NSURL *)URL 
        parameters:(NSDictionary *)parameters 
           success:(MNRequestSuccessBlock)success
           failure:(MNRequestFailureBlock)failure {
   if ((self = [self initWithURL:URL])) {
+    
     self.successBlock = success;
     self.failureBlock = failure;
     self.parserClass = [MNURLResponseParser class];
@@ -140,18 +142,29 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 - (void)dealloc {
+  self.successBlock = nil;
+  self.failureBlock = nil;
+  self.beforeBlock = nil;
+  self.parseBlock = nil;
 }
 
-- (void)prepare {  
+- (void)prepare {
   if (self.beforeBlock) {
     self.beforeBlock(self);
   }
-  if (self.parameters && [self.parameters isKindOfClass:[NSDictionary class]] && self.parameters.count > 0) {
+
+  if (self.parameters.count > 0) {
     NSString *method = self.HTTPMethod;
-    if ([method isEqualToString:@"GET"] || [method isEqualToString:@"HEAD"] || [method isEqualToString:@"DELETE"]) {
+    if (
+        [method isEqualToString:@"GET"] ||
+        [method isEqualToString:@"HEAD"] ||
+        [method isEqualToString:@"DELETE"]
+        )
+    {
       NSString *separator = [self.URL.absoluteString rangeOfString:@"?"].location == NSNotFound ? @"?" : @"&";
       
-      self.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", self.URL.absoluteString, separator, [self.parameters mn_queryString]]];
+      self.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@", [self.URL.absoluteString copy], separator, [self.parameters mn_queryString]]];
+      
     } else {
       [self setValue:@"application/x-www-form-urlencoded;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
       [self setHTTPBody:[[self.parameters mn_queryString] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -188,15 +201,17 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 - (MNURLRequest *(^)(MNRequestParseBlock))parse {
-  return ^MNURLRequest *(MNRequestParseBlock parse) {
-    self.parseBlock = parse;
+  return ^MNURLRequest *(MNRequestParseBlock block) {
+    self.parseBlock = block;
     return self;
   };
 }
 
 - (MNURLRequest *(^)())send {
+  [self prepare];
+  [[MNURLRequestQueue mainQueue] queue:self];
+  
   return ^{
-    MNRequestWithMethod(self, self.HTTPMethod);
     return self;
   };
 }
@@ -206,19 +221,13 @@ static inline void MNRequestWithMethod(MNURLRequest *request, NSString *method) 
 }
 
 + (MNURLRequest *)get:(NSString *)URLString {
-  NSURL *URL = [NSURL URLWithString:URLString];
-  
-  MNURLRequest *request = [[MNURLRequest alloc] initWithURL:URL];
-  request.HTTPMethod = @"GET";
-  
-  return request;
+  return [[MNURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]
+                                    method:@"GET"];;
 }
 
 + (MNURLRequest *)post:(NSString *)URLString {
-  MNURLRequest *request = [[MNURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]];
-  request.HTTPMethod = @"POST";
-  
-  return request;
+  return [[MNURLRequest alloc] initWithURL:[NSURL URLWithString:URLString]
+                                    method:@"POST"];;
 }
 
 @end

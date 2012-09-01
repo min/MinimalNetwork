@@ -10,15 +10,16 @@
 #import "MNURLRequestLoader.h"
 
 @interface MNURLRequestQueue : NSObject {
+  
 }
+
+@property(nonatomic) dispatch_queue_t parse_queue;
 
 + (MNURLRequestQueue *)mainQueue;
 
 - (void)queue:(MNURLRequest *)request;
 - (void)cancel:(MNURLRequest *)request;
 
-- (void)loader:(MNURLRequestLoader *)loader success:(id)data;
-- (void)loader:(MNURLRequestLoader *)loader failure:(NSError *)error;
-
+- (void)loaded:(MNURLRequestLoader *)loader;
 
 @end

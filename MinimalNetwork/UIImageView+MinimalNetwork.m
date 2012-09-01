@@ -9,11 +9,21 @@
 #import "UIImageView+MinimalNetwork.h"
 #import <objc/runtime.h>
 
-static char const * const kMNImageURLObjectKey = "MNImageURLObjectKey";
+static char const *const kMNImageURLObjectKey = "MNImageURLObjectKey";
 
-@implementation UIImageView (MinimalNetwork)
+@interface UIImageView (MinimalNetworkInternal)
+
+@property (nonatomic, readwrite, strong, setter = mn_setRequest:) MNURLRequest *mn_request;
+
+@end
+
+@implementation UIImageView (MinimalNetworkInternal)
 
 @dynamic mn_request;
+
+@end
+
+@implementation UIImageView (MinimalNetwork)
 
 + (NSCache *)mn_cache {
   static NSCache *kImageCache = nil;
@@ -29,7 +39,7 @@ static char const * const kMNImageURLObjectKey = "MNImageURLObjectKey";
   return (MNURLRequest *)objc_getAssociatedObject(self, kMNImageURLObjectKey);
 }
 
-- (void)setMn_request:(MNURLRequest *)request {
+- (void)mn_setRequest:(MNURLRequest *)request {
   objc_setAssociatedObject(self, kMNImageURLObjectKey, request, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -37,17 +47,17 @@ static char const * const kMNImageURLObjectKey = "MNImageURLObjectKey";
   if (nil == url || ![url isKindOfClass:[NSString class]]) {
     return;
   }
+  self.image = nil;
+
+  [self.mn_request cancel];
+  self.mn_request = nil;
   
   UIImage *image = [[[self class] mn_cache] objectForKey:url];
+  
   if (image && [image isKindOfClass:[UIImage class]]) {
     self.image = image;
     return;
   }
-  
-  [self.mn_request cancel];
-  self.image = nil;
-  
-  __weak id _self = self;
   
   self.mn_request = MN_GET(url).
     before(^(MNURLRequest *request) {
@@ -55,8 +65,10 @@ static char const * const kMNImageURLObjectKey = "MNImageURLObjectKey";
       request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     }).
     success(^(MNURLRequest *request, UIImage *image) {
-      [[[self class] mn_cache] setObject:image forKey:request.URL.absoluteString];
-      [_self setImage:image];
+      if (image) {
+        [[[self class] mn_cache] setObject:image forKey:url];
+      }
+      self.image = image;
     }).
     send();
 }

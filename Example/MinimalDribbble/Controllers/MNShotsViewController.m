@@ -24,12 +24,13 @@
 @synthesize shots = _shots;
 
 - (void)reload {
-  [MNDribbbleShot everyone:^(NSArray *shots) {
-    self.shots = shots;
-    [self.tableView reloadData];
-  }
-  failure:^(NSError *error) {                   
-  }];
+
+    [MNDribbbleShot everyone:^(NSArray *shots) {
+      self.shots = shots;
+      [self.tableView reloadData];
+    }
+   failure:^(NSError *error) {
+   }];
 }
 
 - (void)viewDidLoad {
@@ -69,7 +70,7 @@
   MNDribbbleShot *shot = [self.shots objectAtIndex:indexPath.row];
   
   [cell.textLabel setText:shot.title];
-  [cell.thumbnailView load:shot.imageUrl];
+  [cell.thumbnailView mn_load:shot.imageUrl];
   [cell setNeedsLayout];
   
   return cell;

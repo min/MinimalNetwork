@@ -32,7 +32,7 @@
 + (void)everyone:(void (^)(NSArray *shots))success
          failure:(void (^)(NSError *error))failure {
   
-  GET(@"http://api.dribbble.com/shots/everyone?per_page=30").
+  MN_GET(@"http://api.dribbble.com/shots/everyone?per_page=30").
     success(^(MNURLRequest *request, id data){
       NSArray *dictionaries = [data valueForKey:@"shots"];
       NSMutableArray *shots = [[NSMutableArray alloc] initWithCapacity:0];
@@ -52,7 +52,7 @@
     success:(void (^)(MNDribbbleShot *shots))success 
     failure:(void (^)(NSError *error))failure {
   
-  GET(@"http://api.dribbble.com/shots/%@", shotId).
+  MN_GET(@"http://api.dribbble.com/shots/%@", shotId).
     success(^(MNURLRequest *request, id data){
       success([[MNDribbbleShot alloc] initWithDictionary:data]);
     }).

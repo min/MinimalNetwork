@@ -14,71 +14,83 @@
 @interface MNURLRequestLoader()
 
 @property(nonatomic,readwrite) MNURLRequest      *request;
-@property(nonatomic,readwrite) MNURLRequestQueue *queue;
 @property(nonatomic,readwrite) NSHTTPURLResponse *response;
 @property(nonatomic,readwrite) NSMutableData     *responseData;
 @property(nonatomic,readwrite) NSURLConnection   *connection;
 
-- (id)process;
+- (id)parse;
+- (void)success:(id)data;
+- (void)failure:(NSError *)error;
 
 @end
 
 @implementation MNURLRequestLoader
 
-@synthesize request = _request, response = _response, responseData = _responseData;
-@synthesize connection = _connection, queue = _queue;
+- (id)initWithRequest:(MNURLRequest *)request {
+  if (self = [super init]) {
+    self.request = request;
+  }
+  return self;
+}
 
-+ (id)process:(NSHTTPURLResponse *)response data:(NSData *)data request:(MNURLRequest *)request {
-  NSString *mimeType = response.MIMEType;
+- (void)dealloc {
+  [self cancel];
+}
+
+- (void)start {
+  if (self.connection) {
+    return;
+  }
+  self.connection = [[NSURLConnection alloc] initWithRequest:self.request
+                                                    delegate:self
+                                            startImmediately:NO];
   
-  Class parserClass = request.parserClass;
+  [self.connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+  [self.connection start];
+}
+
+- (void)cancel {
+  [self.connection cancel];
+  self.connection = nil;
+  self.responseData = nil;
+}
+
+- (id)parse {
+  NSString *mimeType = self.response.MIMEType;
+  
+  Class parserClass = self.request.parserClass;
   
   if ([mimeType isEqualToString:@"application/json"]) {
     parserClass = [MNJSONResponseParser class];
   }
   
   if ([parserClass respondsToSelector:@selector(process:)]) {
-    return [parserClass process:data];
+    return [parserClass process:self.responseData];
   }
-
-  return data;
-}
-
-- (id)initWithRequest:(MNURLRequest *)request queue:(MNURLRequestQueue *)queue {
-  if (self = [super init]) {
-    self.request     = request;
-    self.queue       = queue;
-  }
-  return self;
-}
-
-- (NSURLConnection *)connection {
-  if (nil == _connection) {
-    _connection = [[NSURLConnection alloc] initWithRequest:self.request
-                                                  delegate:self
-                                          startImmediately:NO];
-    
-    [_connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
-  }
-  return _connection;
-}
-
-- (void)dealloc {  
-}
-
-- (id)process {  
-  return [[self class] process:self.response data:self.responseData request:self.request];
-}
-
-- (void)start {
-  [[self connection] start];
-}
-
-- (void)cancel {
-  [self.connection cancel];
   
-  self.responseData = nil;
-  self.connection = nil;
+  return self.responseData;
+}
+
+- (void)success:(id)data {
+  if (self.request.cancelled) {
+    return;
+  }
+  if (self.request.successBlock) {
+    self.request.successBlock(self.request, data);
+  }
+  
+  [[MNURLRequestQueue mainQueue] loaded:self];
+}
+
+- (void)failure:(NSError *)error {
+  if (self.request.cancelled) {
+    return;
+  }
+  if (self.request.failureBlock) {
+    self.request.failureBlock(self.request, error);
+  }
+  
+  [[MNURLRequestQueue mainQueue] loaded:self];
 }
 
 #pragma mark -
@@ -108,29 +120,37 @@
   if (self.request.cancelled) {
     return;
   }
+  
   if (self.response.statusCode >= 300) {
     NSError *error = [NSError errorWithDomain:NSURLErrorDomain 
                                          code:self.response.statusCode 
                                      userInfo:nil];
     
-    [self.queue loader:self failure:error];
+    [self failure:error];
+    
     return;
   }
+  __weak typeof(self) _self = self;
   
-  [self.queue loader:self success:self.responseData];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
+  dispatch_async([MNURLRequestQueue mainQueue].parse_queue, ^{
+    id data = [_self parse];
+    
+    if (self.request.parseBlock) {
+      data = _self.request.parseBlock(data);
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [_self success:data];
+    });
+  });
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
   if (self.request.cancelled) {
     return;
   }
-  self.responseData = nil;
-  self.connection = nil;
-
-  [self.queue loader:self failure:error];
+  
+  [self failure:error];
 }
 
 @end

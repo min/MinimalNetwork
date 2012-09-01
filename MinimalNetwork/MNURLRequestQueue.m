@@ -13,7 +13,6 @@
 @interface MNURLRequestQueue()
 
 @property(nonatomic,strong) NSMutableArray  *loaders;
-@property(nonatomic)        dispatch_queue_t parse_queue;
 
 - (void)next;
 
@@ -45,30 +44,16 @@
 }
 
 - (void)next {
-  if (self.loaders && self.loaders.count > 0) {
+  if (self.loaders.count > 0) {
+
     MNURLRequestLoader *loader = [self.loaders objectAtIndex:0];
     
-    if ([loader.request.URL.scheme isEqualToString:@"bundle"]) {
-      NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:loader.request.URL.host];
-
-      if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-        [self loader:loader success:[NSData dataWithContentsOfFile:path]];
-      } else {
-        NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
-                                             code:NSFileReadNoSuchFileError
-                                         userInfo:nil];
-        [self loader:loader failure:error];
-      }
-      return;
-    }
     [loader start];
   }
 }
 
 - (void)queue:(MNURLRequest *)request {
-  MNURLRequestLoader *loader =
-  [[MNURLRequestLoader alloc] initWithRequest:request
-                                        queue:self];
+  MNURLRequestLoader *loader = [[MNURLRequestLoader alloc] initWithRequest:request];
   
   if (self.loaders.count == 0) {
     MNNetworkRequestStarted();
@@ -76,12 +61,8 @@
   [self.loaders addObject:loader];
   
   if (self.loaders.count <= 10) {
-    [self next];
+    [loader start];
   }
-}
-
-- (void)cancelAll {
-  [self.loaders removeAllObjects];
 }
 
 - (void)cancel:(MNURLRequest *)request {
@@ -97,44 +78,17 @@
   }
   
   for (MNURLRequestLoader *loader in cancelledLoaders) {
-    [self didFinish:loader];
+    [self loaded:loader];
   }
+  cancelledLoaders = nil;
 }
 
-- (void)didFinish:(MNURLRequestLoader *)loader {
+- (void)loaded:(MNURLRequestLoader *)loader {
   [self.loaders removeObject:loader];
   if (self.loaders.count == 0) {
     MNNetworkRequestFinished();
   }
   [self next];
-}
-
-- (void)loader:(MNURLRequestLoader *)loader success:(id)data {
-  [self didFinish:loader];
-  
-  __block id parsedData = data;
-  
-  dispatch_async(self.parse_queue, ^{
-    parsedData = [MNURLRequestLoader process:loader.response data:parsedData request:loader.request];
-    
-    if (loader.request.parseBlock) {
-      parsedData = loader.request.parseBlock(parsedData);
-    }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      if (loader.request.successBlock) {
-        loader.request.successBlock(loader.request, parsedData);
-      }
-    });
-  });
-}
-
-- (void)loader:(MNURLRequestLoader *)loader failure:(NSError *)error {
-  if (loader.request.failureBlock) {
-    loader.request.failureBlock(loader.request, error);
-  }
-  
-  [self didFinish:loader];
 }
 
 @end

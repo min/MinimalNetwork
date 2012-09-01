@@ -11,8 +11,6 @@
 
 @interface UIImageView (MinimalNetwork)
 
-@property (nonatomic) MNURLRequest *mn_request;
-
 - (void)mn_load:(NSString *)url;
 - (void)mn_cancel;
 

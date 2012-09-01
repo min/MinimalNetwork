@@ -61,4 +61,6 @@ typedef void (^MNRequestBlock)(id request);
 
 - (void)cancel;
 
+- (id)initWithURL:(NSURL *)URL method:(NSString *)method;
+
 @end
