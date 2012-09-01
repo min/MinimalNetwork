@@ -41,6 +41,21 @@
   if (self.connection) {
     return;
   }
+  
+  if ([self.request.URL.scheme isEqualToString:@"bundle"]) {
+    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.request.URL.host];
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+      [self success:[NSData dataWithContentsOfFile:path]];
+    } else {
+      NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
+                                           code:NSFileReadNoSuchFileError
+                                       userInfo:nil];
+      [self failure:error];
+    }
+    return;
+  }
+  
   self.connection = [[NSURLConnection alloc] initWithRequest:self.request
                                                     delegate:self
                                             startImmediately:NO];
