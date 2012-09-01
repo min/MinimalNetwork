@@ -18,7 +18,7 @@
 @property(nonatomic,readwrite) NSMutableData     *responseData;
 @property(nonatomic,readwrite) NSURLConnection   *connection;
 
-- (id)parse;
+- (id)process;
 - (void)success:(id)data;
 - (void)failure:(NSError *)error;
 
@@ -46,7 +46,8 @@
     NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.request.URL.host];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
-      [self success:[NSData dataWithContentsOfFile:path]];
+      self.responseData = [NSData dataWithContentsOfFile:path];
+      [self success:[self process]];
     } else {
       NSError *error = [NSError errorWithDomain:NSCocoaErrorDomain
                                            code:NSFileReadNoSuchFileError
@@ -70,20 +71,20 @@
   self.responseData = nil;
 }
 
-- (id)parse {
-  NSString *mimeType = self.response.MIMEType;
-  
+- (id)process {
   Class parserClass = self.request.parserClass;
   
-  if ([mimeType isEqualToString:@"application/json"]) {
-    parserClass = [MNJSONResponseParser class];
-  }
+  id data = self.responseData;
   
   if ([parserClass respondsToSelector:@selector(process:)]) {
-    return [parserClass process:self.responseData];
+    data = [parserClass process:self.responseData];
   }
   
-  return self.responseData;
+  if (self.request.parseBlock) {
+    data = self.request.parseBlock(data);
+  }
+  
+  return data;
 }
 
 - (void)success:(id)data {
@@ -145,14 +146,15 @@
     
     return;
   }
+  
+  if (!self.request.parserClass && [self.response.MIMEType isEqualToString:@"application/json"]) {
+    self.request.parserClass = [MNJSONResponseParser class];
+  }
+  
   __weak typeof(self) _self = self;
   
   dispatch_async([MNURLRequestQueue mainQueue].parse_queue, ^{
-    id data = [_self parse];
-    
-    if (self.request.parseBlock) {
-      data = _self.request.parseBlock(data);
-    }
+    id data = [_self process];
     
     dispatch_async(dispatch_get_main_queue(), ^{
       [_self success:data];
