@@ -44,6 +44,10 @@ static char const *const kMNImageURLObjectKey = "MNImageURLObjectKey";
 }
 
 - (void)mn_load:(NSString *)url {
+  [self mn_load:url success:nil];
+}
+
+- (void)mn_load:(NSString *)url success:(void (^)(UIImage *image))success {
   if (nil == url || ![url isKindOfClass:[NSString class]]) {
     return;
   }
@@ -56,6 +60,9 @@ static char const *const kMNImageURLObjectKey = "MNImageURLObjectKey";
   
   if (image && [image isKindOfClass:[UIImage class]]) {
     self.image = image;
+    if (success) {
+      success(image);
+    }
     return;
   }
   
@@ -69,6 +76,9 @@ static char const *const kMNImageURLObjectKey = "MNImageURLObjectKey";
         [[[self class] mn_cache] setObject:image forKey:url];
       }
       self.image = image;
+      if (success) {
+        success(image);
+      }
     }).
     send();
 }

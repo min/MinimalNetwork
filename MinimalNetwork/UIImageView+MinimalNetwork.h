@@ -12,6 +12,7 @@
 @interface UIImageView (MinimalNetwork)
 
 - (void)mn_load:(NSString *)url;
+- (void)mn_load:(NSString *)url success:(void (^)(UIImage *image))success;
 - (void)mn_cancel;
 
 @end
