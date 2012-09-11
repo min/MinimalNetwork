@@ -89,8 +89,4 @@ static char const *const kMNImageURLObjectKey = "MNImageURLObjectKey";
   }
 }
 
-- (void)dealloc {
-  self.mn_request = nil;
-}
-
 @end
