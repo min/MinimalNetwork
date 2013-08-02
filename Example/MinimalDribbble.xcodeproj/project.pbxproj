@@ -19,6 +19,7 @@
 		39B8441015802A2A00390ABE /* MNShotsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B8440F15802A2A00390ABE /* MNShotsViewController.m */; };
 		39B8441315802D6100390ABE /* MNShotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B8441215802D6100390ABE /* MNShotViewController.m */; };
 		39B8441A15802E6300390ABE /* MNDribbbleShot.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B8441915802E6300390ABE /* MNDribbbleShot.m */; };
+		39BABF2C17AB8FB2001088E1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39BABF2B17AB8FB2001088E1 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		39B8441215802D6100390ABE /* MNShotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNShotViewController.m; sourceTree = "<group>"; };
 		39B8441815802E6300390ABE /* MNDribbbleShot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNDribbbleShot.h; sourceTree = "<group>"; };
 		39B8441915802E6300390ABE /* MNDribbbleShot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNDribbbleShot.m; sourceTree = "<group>"; };
+		39BABF2B17AB8FB2001088E1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 		399B3D1F1580286100608FCC = {
 			isa = PBXGroup;
 			children = (
+				39BABF2B17AB8FB2001088E1 /* Default-568h@2x.png */,
 				399B3D341580286200608FCC /* MinimalDribbble */,
 				399B3D2D1580286100608FCC /* Frameworks */,
 				399B3D2B1580286100608FCC /* Products */,
@@ -204,7 +207,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MN;
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0460;
 			};
 			buildConfigurationList = 399B3D241580286100608FCC /* Build configuration list for PBXProject "MinimalDribbble" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				399B3D391580286200608FCC /* InfoPlist.strings in Resources */,
+				39BABF2C17AB8FB2001088E1 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +304,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -326,6 +334,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

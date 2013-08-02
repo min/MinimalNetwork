@@ -66,16 +66,17 @@ static char const *const kMNImageURLObjectKey = "MNImageURLObjectKey";
     return;
   }
   
-  self.mn_request = MN_GET(url).
+  __weak __typeof(&*self)weakSelf = self;
+  self.mn_request = MN_GET(url, nil).
     before(^(MNURLRequest *request) {
       request.parserClass = [MNImageResponseParser class];
       request.cachePolicy = NSURLRequestReturnCacheDataElseLoad;
     }).
     success(^(MNURLRequest *request, UIImage *image) {
       if (image) {
-        [[[self class] mn_cache] setObject:image forKey:url];
+        [[[weakSelf class] mn_cache] setObject:image forKey:url];
       }
-      self.image = image;
+      weakSelf.image = image;
       if (success) {
         success(image);
       }
